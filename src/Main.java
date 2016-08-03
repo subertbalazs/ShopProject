@@ -18,7 +18,7 @@ public class Main {
 		mizo.setPrice(280);
 		mizo.setWarrant(getExpireDateFromConsole());
 		System.out.println(mizo);
-		checkWarranty();
+		checkWarranty(warantyDateParser(), nowDateParser());
 	}
 
 	public static String getExpireDateFromConsole() {
@@ -33,14 +33,36 @@ public class Main {
 		return now;
 	}
 
-	public static boolean checkWarranty() {
+	public static Date warantyDateParser() {
 		try {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date warranty = sdf.parse(Milk.getWarrant());
+
+			return warranty;
+
+		} catch (ParseException ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
+	public static Date nowDateParser() {
+		try {
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date now = sdf.parse(getDateTimeNow());
 
 			System.out.println("The current date is: " + sdf.format(now));
+			return now;
+
+		} catch (ParseException ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
+	public static boolean checkWarranty(Date warranty, Date now) {
 
 			if (warranty.after(now)) {
 				System.out.println("The milk is not expired yet");
@@ -54,10 +76,6 @@ public class Main {
 				System.out.println("The expire date is today");
 				return true;
 			}
-
-		} catch (ParseException ex) {
-			ex.printStackTrace();
-		}
 		return false;
 	}
 }
