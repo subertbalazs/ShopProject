@@ -1,16 +1,17 @@
 public class Milk {
 
-	private static double capacity;
+	private static int capacity;
 	private static String warrant;
 	private static double dripping;
-	private static int price;
+	private static long price;
 	private static String company;
 
-	public static double getCapacity() {
+
+	public static int getCapacity() {
 		return capacity;
 	}
 
-	public static void setCapacity(double capacity) {
+	public static void setCapacity(int capacity) {
 		Milk.capacity = capacity;
 	}
 
@@ -30,11 +31,11 @@ public class Milk {
 		Milk.dripping = dripping;
 	}
 
-	public static int getPrice() {
+	public static long getPrice() {
 		return price;
 	}
 
-	public static void setPrice(int price) {
+	public static void setPrice(long price) {
 		Milk.price = price;
 	}
 

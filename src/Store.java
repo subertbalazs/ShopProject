@@ -7,13 +7,19 @@ public class Store {
 	private Milk diaryProducts;
 	private int flag;
 
-	public Store(String name, String address, String owner, Milk diaryProducts, int flag) {
+	public Store(String name, String address, String owner, Milk diaryProducts) {
 		super();
 		this.name = name;
 		this.address = address;
 		this.owner = owner;
 		this.diaryProducts = diaryProducts;
-		this.flag = flag;
+	}
+
+	public Store(String name, String address, String owner) {
+		super();
+		this.name = name;
+		this.address = address;
+		this.owner = owner;
 	}
 
 	public String getName() {

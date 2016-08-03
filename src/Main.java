@@ -12,7 +12,7 @@ public class Main {
 
 
 		Milk mizo = new Milk();
-		mizo.setCapacity(1.0);
+		mizo.setCapacity(1);
 		mizo.setCompany("Mizo Csodafarm");
 		mizo.setDripping(1.5);
 		mizo.setPrice(280);
