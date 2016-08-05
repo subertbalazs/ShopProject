@@ -6,7 +6,7 @@ public class Store {
 	private String name;
 	private String address;
 	private String owner;
-	public static ArrayList<Milk> milkBar;
+	public static ArrayList<Milk> milkBar = new ArrayList<>();
 	private int flag;
 
 	public Store(String name, String address, String owner, ArrayList<Milk> milkBar) {
@@ -45,14 +45,19 @@ public class Store {
 		return false;
 	}
 
-	public static void buyMilk() {
+	public static boolean buyMilk() {
 		System.out.println("\nThe milkBar contains: \n" + milkBar.toString());
 		Scanner reader = new Scanner(System.in);
 		System.out.println("\nPlease enter the index of the item you want to buy: ");
 		int index = reader.nextInt();
+		if (index > milkBar.lastIndexOf(milkBar)) {
+			System.out.println("There is no index like: " + index + "in this array");
+			return false;
+		}
 		milkBar.remove(index);
 		System.out.println("You chose: " + index + "\nThe product with this index is removed from the milkBar!");
 		System.out.println("\nThe milkBar contains: \n" + milkBar.toString());
+		return true;
 	}
 
 	public static void addMilk() {
@@ -60,8 +65,12 @@ public class Store {
 				GetDataFromConsole.getExpireDateFromConsole(), GetDataFromConsole.getDrippingFromConsole(),
 				GetDataFromConsole.getPriceFromConsole(), GetDataFromConsole.getCompanyFromConsole());
 
-		milkBar = new ArrayList<>();
+		// milkBar = new ArrayList<>();
 		milkBar.add(milkObject);
+	}
+
+	public static void printMilkBar() {
+		System.out.println(milkBar);
 	}
 
 }
