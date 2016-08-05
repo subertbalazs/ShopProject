@@ -8,8 +8,12 @@ public class GetDataFromConsole {
 
 	public static String getExpireDateFromConsole() {
 		Scanner reader = new Scanner(System.in);
-		System.out.println("Please enter the expire date (valid format: 2017-11-11): ");
-		String date = reader.nextLine();
+		String date;
+		String pattern = "[0-9]{4}-[0-9]{2}-[0-9]{2}";
+		do {
+			System.out.println("Please enter the expire date (valid format: 2017-11-11): ");
+			date = reader.nextLine();
+		} while (!date.matches(pattern));
 		return date;
 	}
 
