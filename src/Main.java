@@ -9,14 +9,7 @@ public class Main {
 	public static String test;
 
 	public static void main(String[] args) {
-
-
-		Milk mizo = new Milk();
-		mizo.setCapacity(1);
-		mizo.setCompany("Mizo Csodafarm");
-		mizo.setDripping(1.5);
-		mizo.setPrice(280);
-		mizo.setWarrant(getExpireDateFromConsole());
+		Milk mizo = new Milk(1, getExpireDateFromConsole(), 1.5, 280, "Mizo Csodafarm");
 		System.out.println(mizo);
 		checkWarranty(warantyDateParser(), nowDateParser());
 	}

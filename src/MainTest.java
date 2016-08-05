@@ -9,7 +9,6 @@ import org.junit.Test;
 
 public class MainTest {
 
-
 	@Test
 	public void checkTodaysDateFor_getDateTimeNow() {
 		Main junit = new Main();
@@ -27,7 +26,6 @@ public class MainTest {
 			e.printStackTrace();
 		}
 	}
-
 	@Test
 	public void lastCharTestFor_getDateTimeNow() {
 		Main junit = new Main();
@@ -35,7 +33,6 @@ public class MainTest {
 		int date = LocalDateTime.now().toString().substring(9).lastIndexOf(9);
 		assertEquals(result, date);
 	}
-
 	@Test
 	public void checkReturnTypeFor_checkWarranty_withLess_returnTrue() {
 		Main junit = new Main();
@@ -51,7 +48,6 @@ public class MainTest {
 			e.printStackTrace();
 		}
 	}
-
 	@Test
 	public void checkReturnTypeFor_checkWarranty_withEqual_returnTrue() {
 		Main junit = new Main();

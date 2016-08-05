@@ -1,51 +1,40 @@
 public class Milk {
 
-	private static int capacity;
+	private int capacity;
 	private static String warrant;
-	private static double dripping;
-	private static long price;
-	private static String company;
+	private double dripping;
+	private long price;
+	private String company;
 
-
-	public static int getCapacity() {
-		return capacity;
+	public Milk(int capacity, String warrant, double dripping, long price, String company) {
+		super();
+		this.capacity = capacity;
+		this.warrant = warrant;
+		this.dripping = dripping;
+		this.price = price;
+		this.company = company;
 	}
 
-	public static void setCapacity(int capacity) {
-		Milk.capacity = capacity;
+	public int getCapacity() {
+		return capacity;
 	}
 
 	public static String getWarrant() {
 		return warrant;
 	}
 
-	public static void setWarrant(String string) {
-		Milk.warrant = string;
-	}
-
-	public static double getDripping() {
+	public double getDripping() {
 		return dripping;
 	}
 
-	public static void setDripping(double dripping) {
-		Milk.dripping = dripping;
-	}
-
-	public static long getPrice() {
+	public long getPrice() {
 		return price;
 	}
 
-	public static void setPrice(long price) {
-		Milk.price = price;
-	}
-
-	public static String getCompany() {
+	public String getCompany() {
 		return company;
 	}
 
-	public static void setCompany(String company) {
-		Milk.company = company;
-	}
 
 	public String toString() {
 		return "Capacity: " + capacity + "\n" + "Warrant: " + warrant + "\n" + "Dripping: " + dripping + "\n"

@@ -4,10 +4,10 @@ public class Store {
 	private String name;
 	private String address;
 	private String owner;
-	private Milk diaryProducts;
+	private Milk[] diaryProducts;
 	private int flag;
 
-	public Store(String name, String address, String owner, Milk diaryProducts) {
+	public Store(String name, String address, String owner, Milk[] diaryProducts) {
 		super();
 		this.name = name;
 		this.address = address;
