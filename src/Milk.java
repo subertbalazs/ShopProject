@@ -15,7 +15,7 @@ public class Milk {
 	public Milk(int capacity, String warrant, double dripping, long price, String company) {
 		super();
 		this.capacity = capacity;
-		this.warrant = warrant;
+		Milk.warrant = warrant;
 		this.dripping = dripping;
 		this.price = price;
 		this.company = company;
@@ -47,6 +47,7 @@ public class Milk {
 		String date = reader.nextLine();
 		return date;
 	}
+
 
 	public static String getDateTimeNow() {
 		String now = LocalDateTime.now().toString();
@@ -103,5 +104,34 @@ public class Milk {
 		return "Capacity: " + capacity + "\n" + "Warrant: " + warrant + "\n" + "Dripping: " + dripping + "\n"
 				+ "Price: " + price + " " + "\n" + "Company: " + company;
 	}
+
+	public static int getCapacityFromConsole() {
+		Scanner reader = new Scanner(System.in);
+		System.out.println("Please enter the capacity in ml (valid format: 500,1000 or 1500 etc.): ");
+		int capacity = reader.nextInt();
+		return capacity;
+	}
+
+	public static double getDrippingFromConsole() {
+		Scanner reader = new Scanner(System.in);
+		System.out.println("Please enter the dripping (valid format: 1,5 or 2,8 or 3,5 etc.): ");
+		double dripping = reader.nextDouble();
+		return dripping;
+	}
+
+	public static long getPriceFromConsole() {
+		Scanner reader = new Scanner(System.in);
+		System.out.println("Please enter the price in Ft (valid format: 280 etc.): ");
+		long price = reader.nextInt();
+		return price;
+	}
+
+	public static String getCompanyFromConsole() {
+		Scanner reader = new Scanner(System.in);
+		System.out.println("Please enter the company name");
+		String company = reader.nextLine();
+		return company;
+	}
+
 
 }

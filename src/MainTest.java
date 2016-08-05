@@ -22,7 +22,6 @@ public class MainTest {
 			Date getFromNowFunction = sdf.parse(result);
 			assertEquals(nowDate, getFromNowFunction);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -42,7 +41,6 @@ public class MainTest {
 			boolean result = Milk.checkWarranty(warranty, now);
 			assertEquals(result, true);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -70,7 +68,6 @@ public class MainTest {
 			boolean result = Milk.checkWarranty(warranty, now);
 			assertEquals(result, false);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
