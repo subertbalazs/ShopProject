@@ -7,12 +7,12 @@ import java.util.Date;
 
 import org.junit.Test;
 
-public class MainTest {
+public class TestGetDataFromConsole {
 
 	@Test
 	public void checkTodaysDateFor_getDateTimeNow() {
 
-		String result = getDataFromConsole.getDateTimeNow();
+		String result = GetDataFromConsole.getDateTimeNow();
 		String now = LocalDateTime.now().toString();
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -27,7 +27,7 @@ public class MainTest {
 	}
 	@Test
 	public void lastCharTestFor_getDateTimeNow() {
-		int result = getDataFromConsole.getDateTimeNow().substring(9).lastIndexOf(9);
+		int result = GetDataFromConsole.getDateTimeNow().substring(9).lastIndexOf(9);
 		int date = LocalDateTime.now().toString().substring(9).lastIndexOf(9);
 		assertEquals(result, date);
 	}
@@ -38,7 +38,7 @@ public class MainTest {
 		try {
 			warranty = sdf.parse("2012-11-13");
 			Date now = sdf.parse("2012-11-11");
-			boolean result = getDataFromConsole.checkWarranty(warranty, now);
+			boolean result = GetDataFromConsole.checkWarranty(warranty, now);
 			assertEquals(result, true);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -51,7 +51,7 @@ public class MainTest {
 		try {
 			warranty = sdf.parse("2012-11-11");
 			Date now = sdf.parse("2012-11-11");
-			boolean result = getDataFromConsole.checkWarranty(warranty, now);
+			boolean result = GetDataFromConsole.checkWarranty(warranty, now);
 			assertEquals(result, true);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
@@ -65,7 +65,7 @@ public class MainTest {
 		try {
 			warranty = sdf.parse("2012-11-11");
 			Date now = sdf.parse("2012-11-13");
-			boolean result = getDataFromConsole.checkWarranty(warranty, now);
+			boolean result = GetDataFromConsole.checkWarranty(warranty, now);
 			assertEquals(result, false);
 		} catch (ParseException e) {
 			e.printStackTrace();

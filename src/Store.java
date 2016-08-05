@@ -56,8 +56,9 @@ public class Store {
 	}
 
 	public static void addMilk() {
-		Milk milkObject = new Milk(Milk.getCapacityFromConsole(), Milk.getExpireDateFromConsole(),
-				Milk.getDrippingFromConsole(), Milk.getPriceFromConsole(), Milk.getCompanyFromConsole());
+		Milk milkObject = new Milk(GetDataFromConsole.getCapacityFromConsole(),
+				GetDataFromConsole.getExpireDateFromConsole(), GetDataFromConsole.getDrippingFromConsole(),
+				GetDataFromConsole.getPriceFromConsole(), GetDataFromConsole.getCompanyFromConsole());
 
 		milkBar = new ArrayList<>();
 		milkBar.add(milkObject);

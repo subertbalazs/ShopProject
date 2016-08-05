@@ -28,7 +28,7 @@ public class Main {
 		 */
 		
 		Store.addMilk();
-		Milk.checkWarranty(Milk.warantyDateParser(), Milk.nowDateParser());
+		GetDataFromConsole.checkWarranty(GetDataFromConsole.warantyDateParser(), GetDataFromConsole.nowDateParser());
 		Store.isThereAnyMilk();
 		Store.buyMilk();
 	}
