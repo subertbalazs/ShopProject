@@ -1,4 +1,6 @@
-import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class Store {
@@ -6,10 +8,10 @@ public class Store {
 	private String name;
 	private String address;
 	private String owner;
-	public static ArrayList<Milk> milkBar = new ArrayList<>();
+	public static Hashtable<Integer, Milk> milkBar = new Hashtable<>();
 	private int flag;
 
-	public Store(String name, String address, String owner, ArrayList<Milk> milkBar) {
+	public Store(String name, String address, String owner, Hashtable<Integer, Milk> milkBar) {
 		super();
 		this.name = name;
 		this.address = address;
@@ -46,31 +48,43 @@ public class Store {
 	}
 
 	public static boolean buyMilk() {
-		System.out.println("\nThe milkBar contains: \n" + milkBar.toString());
-		Scanner reader = new Scanner(System.in);
-		System.out.println("\nPlease enter the index of the item you want to buy: ");
-		int index = reader.nextInt();
-		if (index > milkBar.lastIndexOf(milkBar)) {
-			System.out.println("There is no index like: " + index + "in this array");
+		if (milkBar.isEmpty()) {
+			System.out.println("The milkbar is empty!\n");
 			return false;
 		}
-		milkBar.remove(index);
-		System.out.println("You chose: " + index + "\nThe product with this index is removed from the milkBar!");
 		System.out.println("\nThe milkBar contains: \n" + milkBar.toString());
-		return true;
+		Scanner reader = new Scanner(System.in);
+		System.out.println("\nPlease enter the barCode of the item you want to buy: ");
+		Integer barCode = reader.nextInt();
+		for (Iterator<Entry<Integer, Milk>> i = milkBar.entrySet().iterator(); i.hasNext();) {
+			Entry<Integer, Milk> entry = i.next();
+
+			if (barCode.equals(entry.getKey())) {
+				// Removes entry from Hashtable; note, this is not the
+				// Hashtable.remove() method
+				// but the Iterator.remove() method
+				i.remove();
+				System.out.println(
+						"You chose: " + barCode + "\nThe product with this barCode is removed from the milkBar!");
+				return true;
+			}
+		}
+		System.out.println("There is no product with barCode like: " + barCode + "in the stock!");
+		printMilkBar();
+		return false;
 	}
 
 	public static void addMilk() {
-		Milk milkObject = new Milk(GetDataFromConsole.getCapacityFromConsole(),
+		Milk milkObject = new Milk(GetDataFromConsole.getBarCodeFromConsole(),
+				GetDataFromConsole.getCapacityFromConsole(),
 				GetDataFromConsole.getExpireDateFromConsole(), GetDataFromConsole.getDrippingFromConsole(),
 				GetDataFromConsole.getPriceFromConsole(), GetDataFromConsole.getCompanyFromConsole());
 
-		// milkBar = new ArrayList<>();
-		milkBar.add(milkObject);
+		milkBar.put((int) milkObject.getBarCode(), milkObject);
 	}
 
 	public static void printMilkBar() {
-		System.out.println(milkBar);
+		System.out.println("\nThe milkBar contains: \n" + milkBar.toString() + "\n");
 	}
 
 }

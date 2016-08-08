@@ -22,11 +22,11 @@ public class GetDataFromConsole {
 		return now;
 	}
 
-	public static Date warantyDateParser() {
+	public Date warantyDateParser() {
 		try {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date warranty = sdf.parse(Milk.getWarrant());
+			Date warranty = sdf.parse(getExpireDateFromConsole());
 
 			return warranty;
 
@@ -115,5 +115,19 @@ public class GetDataFromConsole {
 		System.out.println("Please enter the company name: ");
 		String company = reader.nextLine();
 		return company;
+	}
+
+	public static long getBarCodeFromConsole() {
+		Scanner reader = new Scanner(System.in);
+		long barCode;
+		do {
+			System.out.println("Please enter the barCode of the product: ");
+			while (!reader.hasNextInt()) {
+				System.out.println("This is not a barCodeNumber!");
+				reader.next();
+			}
+			barCode = reader.nextInt();
+		} while (barCode <= 0);
+		return barCode;
 	}
 }

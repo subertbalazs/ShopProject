@@ -1,15 +1,23 @@
 public class Milk {
 
+	private long barCode;
+	public static final int LITER = 1000;
+	public static final int HALF_LITER = 500;;
+	public static final int GLASS = 250;
+	public static final double WHOLE_FAT = 1.5;
+	public static final double REDUCED_FAT = 2.8;
+
 	private int capacity;
-	private static String warrant;
+	private String warrant;
 	private double dripping;
 	private long price;
 	private String company;
 
-	public Milk(int capacity, String warrant, double dripping, long price, String company) {
+	public Milk(long barCode, int capacity, String warrant, double dripping, long price, String company) {
 		super();
+		this.barCode = barCode;
 		this.capacity = capacity;
-		Milk.warrant = warrant;
+		this.warrant = warrant;
 		this.dripping = dripping;
 		this.price = price;
 		this.company = company;
@@ -19,7 +27,7 @@ public class Milk {
 		return capacity;
 	}
 
-	public static String getWarrant() {
+	public String getWarrant() {
 		return warrant;
 	}
 
@@ -35,8 +43,13 @@ public class Milk {
 		return company;
 	}
 
+	public long getBarCode() {
+		return barCode;
+	}
+
 	public String toString() {
-		return "Capacity: " + capacity + "\n" + "Warrant: " + warrant + "\n" + "Dripping: " + dripping + "\n"
+		return "BarCode: " + barCode + "\n" + "Capacity: " + capacity + "\n" + "Warrant: " + warrant + "\n"
+				+ "Dripping: " + dripping + "\n"
 				+ "Price: " + price + " " + "\n" + "Company: " + company;
 	}
 
