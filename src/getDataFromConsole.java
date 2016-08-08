@@ -2,6 +2,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class GetDataFromConsole {
@@ -22,11 +23,11 @@ public class GetDataFromConsole {
 		return now;
 	}
 
-	public Date warantyDateParser() {
+	public static Date warantyDateParser() {
 		try {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date warranty = sdf.parse(getExpireDateFromConsole());
+			Date warranty = sdf.parse(getBarCodeToCheckWarrantyFromConsole());
 
 			return warranty;
 
@@ -42,7 +43,7 @@ public class GetDataFromConsole {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date now = sdf.parse(getDateTimeNow());
 
-			System.out.println("\nThe current date is: " + sdf.format(now));
+			System.out.println("The current date is: " + sdf.format(now));
 			return now;
 
 		} catch (ParseException ex) {
@@ -54,15 +55,15 @@ public class GetDataFromConsole {
 	public static boolean checkWarranty(Date warranty, Date now) {
 
 		if (warranty.after(now)) {
-			System.out.println("The milk is not expired yet");
+			System.out.println("The milk is not expired yet.\n");
 			return true;
 		}
 		if (warranty.before(now)) {
-			System.out.println("The milk is expired");
+			System.out.println("The milk is expired.\n");
 			return false;
 		}
 		if (warranty.equals(now)) {
-			System.out.println("The expire date is today");
+			System.out.println("The expire date is today.\n");
 			return true;
 		}
 		return false;
@@ -118,6 +119,7 @@ public class GetDataFromConsole {
 	}
 
 	public static long getBarCodeFromConsole() {
+
 		Scanner reader = new Scanner(System.in);
 		long barCode;
 		do {
@@ -129,5 +131,29 @@ public class GetDataFromConsole {
 			barCode = reader.nextInt();
 		} while (barCode <= 0);
 		return barCode;
+	}
+
+	public static String getBarCodeToCheckWarrantyFromConsole() {
+		if (Store.milkBar.isEmpty()) {
+			System.out.println("The milkbar is empty!\n");
+			return null;
+		}
+		System.out.println("\nThe milkBar contains: \n" + Store.milkBar.toString());
+		Scanner reader = new Scanner(System.in);
+		System.out.println("\nPlease enter the barCode of the item whick warranty would like to check: ");
+		Integer barCode = reader.nextInt();
+		for (Entry<Integer, Milk> entry : Store.milkBar.entrySet()) {
+			Integer key = entry.getKey();
+			Milk value = entry.getValue();
+			if (barCode.equals(key)) {
+
+				System.out.println("The expire date of this product is: " + value.getWarrant());
+				return value.getWarrant();
+			}
+
+		}
+		System.out.println("There is no product with barCode like: " + barCode + " in the stock!");
+		Store.printMilkBar();
+		return null;
 	}
 }

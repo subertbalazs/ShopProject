@@ -60,16 +60,14 @@ public class Store {
 			Entry<Integer, Milk> entry = i.next();
 
 			if (barCode.equals(entry.getKey())) {
-				// Removes entry from Hashtable; note, this is not the
-				// Hashtable.remove() method
-				// but the Iterator.remove() method
 				i.remove();
 				System.out.println(
 						"You chose: " + barCode + "\nThe product with this barCode is removed from the milkBar!");
+				printMilkBar();
 				return true;
 			}
 		}
-		System.out.println("There is no product with barCode like: " + barCode + "in the stock!");
+		System.out.println("There is no product with barCode like: " + barCode + " in the stock!");
 		printMilkBar();
 		return false;
 	}
