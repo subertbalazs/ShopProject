@@ -1,7 +1,6 @@
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map.Entry;
-import java.util.Scanner;
 
 public class Store {
 
@@ -38,25 +37,21 @@ public class Store {
 		return owner;
 	}
 
-	public static boolean isThereAnyMilk() {
-		if (milkBar.isEmpty()) {
+	public static boolean isThereAnyMilk(Hashtable bar) {
+		if (bar.isEmpty()) {
 			System.out.println("\nThe milk is over.");
 			return true;
 		}
 		System.out.println("\nThe milk is not over yet.");
+		System.out.println("\nThe milkBar contains: \n" + bar.toString());
 		return false;
 	}
 
-	public static boolean buyMilk() {
-		if (milkBar.isEmpty()) {
-			System.out.println("The milkbar is empty!\n");
-			return false;
-		}
-		System.out.println("\nThe milkBar contains: \n" + milkBar.toString());
-		Scanner reader = new Scanner(System.in);
-		System.out.println("\nPlease enter the barCode of the item you want to buy: ");
-		Integer barCode = reader.nextInt();
-		for (Iterator<Entry<Integer, Milk>> i = milkBar.entrySet().iterator(); i.hasNext();) {
+	public static boolean buyMilk(Hashtable bar, Integer barCode) {
+
+		// System.out.println("\nThe milkBar contains: \n" + bar.toString());
+
+		for (Iterator<Entry<Integer, Milk>> i = bar.entrySet().iterator(); i.hasNext();) {
 			Entry<Integer, Milk> entry = i.next();
 
 			if (barCode.equals(entry.getKey())) {
@@ -67,18 +62,27 @@ public class Store {
 				return true;
 			}
 		}
-		System.out.println("There is no product with barCode like: " + barCode + " in the stock!");
-		printMilkBar();
+		System.out.println("There is no product with barCode like: " + barCode + " in the stock!\n");
+		// printMilkBar();
 		return false;
 	}
 
-	public static void addMilk() {
+	public static Milk createMilkInstance() {
 		Milk milkObject = new Milk(GetDataFromConsole.getBarCodeFromConsole(),
 				GetDataFromConsole.getCapacityFromConsole(),
 				GetDataFromConsole.getExpireDateFromConsole(), GetDataFromConsole.getDrippingFromConsole(),
 				GetDataFromConsole.getPriceFromConsole(), GetDataFromConsole.getCompanyFromConsole());
-
-		milkBar.put((int) milkObject.getBarCode(), milkObject);
+		return milkObject;
+	}
+	
+	public static boolean addMilkToMilkBar(Milk milk, Hashtable bar) {
+		try {
+			milkBar.put((int) milk.getBarCode(), milk);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	public static void printMilkBar() {

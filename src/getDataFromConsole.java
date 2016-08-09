@@ -75,7 +75,7 @@ public class GetDataFromConsole {
 		do {
 			System.out.println("Please enter the capacity in ml (valid format: 500,1000 or 1500 etc.): ");
 			while (!reader.hasNextInt()) {
-				System.out.println("This is not a number!");
+				System.out.println("This is not a number! Enter valid number: ");
 				reader.next();
 			}
 			capacity = reader.nextInt();
@@ -89,7 +89,7 @@ public class GetDataFromConsole {
 		do {
 			System.out.println("Please enter the dripping (valid format: 1,5 or 2,8 or 3,5 etc.): ");
 			while (!reader.hasNextDouble()) {
-				System.out.println("Please enter a positive double number!");
+				System.out.println("Please enter a number(This is not valid format: 1.5): ");
 				reader.next();
 			}
 			dripping = reader.nextDouble();
@@ -103,7 +103,7 @@ public class GetDataFromConsole {
 		do {
 			System.out.println("Please enter the price in Ft (valid format: 280 etc.): ");
 			while (!reader.hasNextInt()) {
-				System.out.println("This is not a number!");
+				System.out.println("This is not a number! Enter valid number: ");
 				reader.next();
 			}
 			price = reader.nextInt();
@@ -118,14 +118,21 @@ public class GetDataFromConsole {
 		return company;
 	}
 
+	public static Integer makeScennerForBarCode() {
+		Scanner reader = new Scanner(System.in);
+		System.out.println("\nPlease enter the barCode of the item: ");
+		Integer barCode = reader.nextInt();
+		return barCode;
+	}
+
 	public static long getBarCodeFromConsole() {
 
 		Scanner reader = new Scanner(System.in);
 		long barCode;
 		do {
-			System.out.println("Please enter the barCode of the product: ");
+			System.out.println("Please enter the barCode of the item: ");
 			while (!reader.hasNextInt()) {
-				System.out.println("This is not a barCodeNumber! Please enter a valid: ");
+				System.out.println("This is not a barCode number! Please enter a valid: ");
 				reader.next();
 			}
 			barCode = reader.nextInt();
@@ -141,10 +148,11 @@ public class GetDataFromConsole {
 		Scanner reader = new Scanner(System.in);
 		Integer barCode;
 		do {
-			System.out.println("\nThe milkBar contains: \n" + Store.milkBar.toString());
+			// System.out.println("\nThe milkBar contains: \n" +
+			// Store.milkBar.toString());
 			System.out.println("\nPlease enter the barCode of the product: ");
 			while (!reader.hasNextInt()) {
-				System.out.println("This is not a barCodeNumber! Please enter a valid: ");
+				System.out.println("This is not a barCode number! Please enter a valid: ");
 				reader.next();
 			}
 			barCode = reader.nextInt();
@@ -166,8 +174,7 @@ public class GetDataFromConsole {
 		while (date == null) {
 			GetDataFromConsole.checkWarranty(GetDataFromConsole.warantyDateParser(),
 					GetDataFromConsole.nowDateParser());
-			Main.drawMenu();
-			Main.Menu(Main.menuItemScanner());
+			Main.createMenuStuff();
 		}
 		return date;
 	}
