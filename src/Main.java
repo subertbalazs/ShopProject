@@ -9,7 +9,7 @@ public class Main {
 		Menu(menuItemScanner());
 	}
 
-	private static int menuItemScanner() {
+	static int menuItemScanner() {
 
 		Scanner reader = new Scanner(System.in);
 		int menItem;
@@ -25,7 +25,7 @@ public class Main {
 		return menItem;
 	}
 
-	private static void drawMenu() {
+	static void drawMenu() {
 		System.out.println("---=== MENU ===---");
 		System.out.println("1 - Add milk to the stock");
 		System.out.println("2 - Is there any milk in the stock?");
@@ -33,7 +33,7 @@ public class Main {
 		System.out.println("4 - Warranty check");
 	}
 
-	private static void Menu(int choosen) {
+	static void Menu(int choosen) {
 		if (choosen == 1) {
 			Store.addMilk();
 			Store.printMilkBar();
@@ -49,8 +49,12 @@ public class Main {
 			drawMenu();
 			Menu(menuItemScanner());
 		} else if (choosen == 4) {
-			GetDataFromConsole.checkWarranty(GetDataFromConsole.warantyDateParser(),
-					GetDataFromConsole.nowDateParser());
+			if (!Store.isThereAnyMilk()) {
+					GetDataFromConsole.checkWarranty(GetDataFromConsole.warantyDateParser(),
+							GetDataFromConsole.nowDateParser());
+				drawMenu();
+				Menu(menuItemScanner());
+			}
 			drawMenu();
 			Menu(menuItemScanner());
 		}

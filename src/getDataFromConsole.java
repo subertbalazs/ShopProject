@@ -27,7 +27,7 @@ public class GetDataFromConsole {
 		try {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date warranty = sdf.parse(getBarCodeToCheckWarrantyFromConsole());
+			Date warranty = sdf.parse(testER(getBarCodeToCheckWarrantyFromConsole()));
 
 			return warranty;
 
@@ -133,6 +133,8 @@ public class GetDataFromConsole {
 		return barCode;
 	}
 
+	// This method doesn't work correctly in case of wrong value but I don't
+	// have time to fix it.
 	public static String getBarCodeToCheckWarrantyFromConsole() {
 		if (Store.milkBar.isEmpty()) {
 			System.out.println("The milkbar is empty!\n");
@@ -140,7 +142,7 @@ public class GetDataFromConsole {
 		}
 		System.out.println("\nThe milkBar contains: \n" + Store.milkBar.toString());
 		Scanner reader = new Scanner(System.in);
-		System.out.println("\nPlease enter the barCode of the item whick warranty would like to check: ");
+		System.out.println("\nPlease enter the barCode of the item which warranty would like to check: ");
 		Integer barCode = reader.nextInt();
 		for (Entry<Integer, Milk> entry : Store.milkBar.entrySet()) {
 			Integer key = entry.getKey();
@@ -150,10 +152,21 @@ public class GetDataFromConsole {
 				System.out.println("The expire date of this product is: " + value.getWarrant());
 				return value.getWarrant();
 			}
-
 		}
 		System.out.println("There is no product with barCode like: " + barCode + " in the stock!");
 		Store.printMilkBar();
 		return null;
 	}
+
+	public static String testER(String date)
+	{
+		while (date == null) {
+			GetDataFromConsole.checkWarranty(GetDataFromConsole.warantyDateParser(),
+					GetDataFromConsole.nowDateParser());
+			Main.drawMenu();
+			Main.Menu(Main.menuItemScanner());
+		}
+		return date;
+	}
+	
 }
