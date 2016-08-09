@@ -27,7 +27,7 @@ public class GetDataFromConsole {
 		try {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date warranty = sdf.parse(testER(getBarCodeToCheckWarrantyFromConsole()));
+			Date warranty = sdf.parse(returnValueTester(getBarCodeToCheckWarrantyFromConsole()));
 
 			return warranty;
 
@@ -142,7 +142,7 @@ public class GetDataFromConsole {
 		Integer barCode;
 		do {
 			System.out.println("\nThe milkBar contains: \n" + Store.milkBar.toString());
-			System.out.println("\nPlease enter the barCode of the item which warranty would like to check: ");
+			System.out.println("\nPlease enter the barCode of the product: ");
 			while (!reader.hasNextInt()) {
 				System.out.println("This is not a barCodeNumber! Please enter a valid: ");
 				reader.next();
@@ -154,19 +154,16 @@ public class GetDataFromConsole {
 				Integer key = entry.getKey();
 				Milk value = entry.getValue();
 				if (barCode.equals(key)) {
-
 					System.out.println("The expire date of this product is: " + value.getWarrant());
 					return value.getWarrant();
 				}
 			}
 		}
 		System.out.println("There is no product with barCode like: " + barCode + " in the stock!");
-		Store.printMilkBar();
 		return null;
 	}
 
-
-	public static String testER(String date)
+	public static String returnValueTester(String date)
 	{
 		while (date == null) {
 			GetDataFromConsole.checkWarranty(GetDataFromConsole.warantyDateParser(),

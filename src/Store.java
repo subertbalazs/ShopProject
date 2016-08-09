@@ -85,4 +85,49 @@ public class Store {
 		System.out.println("\nThe milkBar contains: \n" + milkBar.toString() + "\n");
 	}
 
+	private class StoreEntry {
+		Milk milk;
+		int quantity;
+		int price;
+
+		public StoreEntry(Milk milk, int quantity, int price) {
+			super();
+			this.milk = milk;
+			this.quantity = quantity;
+			this.price = price;
+		}
+
+		public Milk getMilk() {
+			return milk;
+		}
+
+		public void setMilk(Milk milk) {
+			this.milk = milk;
+		}
+
+		public int getQuantity() {
+			return quantity;
+		}
+
+		public void setQuantity(int quantity) {
+			this.quantity = quantity;
+		}
+
+		public int getPrice() {
+			return price;
+		}
+
+		public void setPrice(int price) {
+			this.price = price;
+		}
+
+		public void increaseQuantity() {
+
+		}
+
+		public void decreaseQuantity() {
+
+		}
+
+	}
 }
