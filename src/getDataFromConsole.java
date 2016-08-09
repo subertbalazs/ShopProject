@@ -149,7 +149,6 @@ public class GetDataFromConsole {
 			}
 			barCode = reader.nextInt();
 		} while (barCode <= 0);
-		{
 			for (Entry<Integer, Milk> entry : Store.milkBar.entrySet()) {
 				Integer key = entry.getKey();
 				Milk value = entry.getValue();
@@ -158,7 +157,6 @@ public class GetDataFromConsole {
 					return value.getWarrant();
 				}
 			}
-		}
 		System.out.println("There is no product with barCode like: " + barCode + " in the stock!");
 		return null;
 	}
