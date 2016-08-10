@@ -1,6 +1,7 @@
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.Scanner;
 
 public class Store {
 
@@ -47,23 +48,32 @@ public class Store {
 		return false;
 	}
 
-	public static boolean buyMilk(Hashtable bar, Integer barCode) {
+	public static boolean buyMilk() {
 
-		// System.out.println("\nThe milkBar contains: \n" + bar.toString());
-
-		for (Iterator<Entry<Integer, Milk>> i = bar.entrySet().iterator(); i.hasNext();) {
+		Scanner reader = new Scanner(System.in);
+		Integer barCode;
+		do {
+			// System.out.println("\nThe milkBar contains: \n" +
+			// Store.milkBar.toString());
+			System.out.println("\nPlease enter the barCode of the product: ");
+			while (!reader.hasNextInt()) {
+				System.out.println("This is not a barCode number! Please enter a valid: ");
+				reader.next();
+			}
+			barCode = reader.nextInt();
+		} while (barCode <= 0);
+		for (Iterator<Entry<Integer, Milk>> i = Store.milkBar.entrySet().iterator(); i.hasNext();) {
 			Entry<Integer, Milk> entry = i.next();
-
-			if (barCode.equals(entry.getKey())) {
-				i.remove();
+			Integer key = entry.getKey();
+			Milk value = entry.getValue();
+			if (barCode.equals(key)) {
 				System.out.println(
 						"You chose: " + barCode + "\nThe product with this barCode is removed from the milkBar!");
-				printMilkBar();
+				i.remove();
 				return true;
 			}
-		}
-		System.out.println("There is no product with barCode like: " + barCode + " in the stock!\n");
-		// printMilkBar();
+			}
+		System.out.println("There is no product with barCode like: " + barCode + " in the stock!");
 		return false;
 	}
 
