@@ -25,35 +25,39 @@ public class TestStore {
 	public void test_buyMilk_returnFalse_inCaseOfEmptyHashTabl() {
 		Hashtable testHashTable = new Hashtable<>();
 		int barCode = 1;
-		boolean result = Store.buyMilk(testHashTable, barCode);
+		boolean result = Store.buyMilk(barCode, testHashTable);
 		assertEquals(result, false);
 	}
 
 	@Test
 	public void test_buyMilk_returnFalse_inCaseOfOneItemWithWrongKey() {
-		Hashtable testHashTable = new Hashtable<>();
-		testHashTable.put(1, "one");
+		Hashtable<Integer, Milk> testHashTable = new Hashtable<>();
+		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, 230, "test");
+		testHashTable.put(1, milk);
 		int barCode = 2;
-		boolean result = Store.buyMilk(testHashTable, barCode);
+		boolean result = Store.buyMilk(barCode, testHashTable);
 		assertEquals(result, false);
 	}
 	
 	@Test
 	public void test_buyMilk_returnTrue_inCaseOfOneItemWithCorrectKey() {
-		Hashtable testHashTable = new Hashtable<>();
-		testHashTable.put(1, "one");
+		Hashtable<Integer, Milk> testHashTable = new Hashtable<>();
+		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, 230, "test");
+		testHashTable.put(1, milk);
 		int barCode = 1;
-		boolean result = Store.buyMilk(testHashTable, barCode);
+		boolean result = Store.buyMilk(barCode, testHashTable);
 		assertEquals(result, true);
 	}
 
 	@Test
 	public void test_buyMilk_returnTrue_inCaseOfMultipleItemWithCorrectKey() {
-		Hashtable testHashTable = new Hashtable<>();
-		testHashTable.put(1, "one");
-		testHashTable.put(2, "one");
-		int barCode = 2;
-		boolean result = Store.buyMilk(testHashTable, barCode);
+		Hashtable<Integer, Milk> testHashTable = new Hashtable<>();
+		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, 230, "test");
+		Milk milk2 = new Milk(2222, 500, "2012-11-11", 1, 240, "test2");
+		testHashTable.put(1, milk);
+		testHashTable.put(1, milk2);
+		int barCode = 1;
+		boolean result = Store.buyMilk(barCode, testHashTable);
 		assertEquals(result, true);
 	}
 

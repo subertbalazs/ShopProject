@@ -2,6 +2,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
@@ -27,7 +28,7 @@ public class GetDataFromConsole {
 		try {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date warranty = sdf.parse(returnValueTester(getBarCodeToCheckWarrantyFromConsole()));
+			Date warranty = sdf.parse(returnValueTester(getBarCodeToCheckWarrantyFromConsole(getBarCodeFromConsole())));
 
 			return warranty;
 
@@ -126,11 +127,10 @@ public class GetDataFromConsole {
 	}
 
 	public static long getBarCodeFromConsole() {
-
 		Scanner reader = new Scanner(System.in);
 		long barCode;
 		do {
-			System.out.println("Please enter the barCode of the item: ");
+			System.out.println("Please enter the barCode of the ptoduct: ");
 			while (!reader.hasNextInt()) {
 				System.out.println("This is not a barCode number! Please enter a valid: ");
 				reader.next();
@@ -140,27 +140,12 @@ public class GetDataFromConsole {
 		return barCode;
 	}
 
-	public static String getBarCodeToCheckWarrantyFromConsole() {
-		if (Store.milkBar.isEmpty()) {
-			System.out.println("The milkbar is empty!\n");
-			return null;
-		}
-		Scanner reader = new Scanner(System.in);
-		Integer barCode;
-		do {
-			// System.out.println("\nThe milkBar contains: \n" +
-			// Store.milkBar.toString());
-			System.out.println("\nPlease enter the barCode of the product: ");
-			while (!reader.hasNextInt()) {
-				System.out.println("This is not a barCode number! Please enter a valid: ");
-				reader.next();
-			}
-			barCode = reader.nextInt();
-		} while (barCode <= 0);
+	public static String getBarCodeToCheckWarrantyFromConsole(long barCode) {
+		Integer integerBarCode = (int) (long) barCode;
 			for (Entry<Integer, Milk> entry : Store.milkBar.entrySet()) {
 				Integer key = entry.getKey();
 				Milk value = entry.getValue();
-				if (barCode.equals(key)) {
+			if (integerBarCode.equals(key)) {
 					System.out.println("The expire date of this product is: " + value.getWarrant());
 					return value.getWarrant();
 				}

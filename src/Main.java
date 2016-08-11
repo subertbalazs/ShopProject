@@ -45,7 +45,7 @@ public class Main {
 			createMenuStuff();
 		} else if (choosen == 3) {
 			if (!Store.isThereAnyMilk(Store.milkBar)) {
-				Store.buyMilk();
+				Store.buyMilk(GetDataFromConsole.getBarCodeFromConsole(), Store.milkBar);
 			}
 			createMenuStuff();
 		} else if (choosen == 4) {
