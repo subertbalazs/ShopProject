@@ -2,7 +2,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.Hashtable;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
@@ -28,7 +27,7 @@ public class GetDataFromConsole {
 		try {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date warranty = sdf.parse(returnValueTester(getBarCodeToCheckWarrantyFromConsole(getBarCodeFromConsole())));
+			Date warranty = sdf.parse(returnValueTesterForGetWarrantyByConsole(getWarrantyByBarCode(getBarCodeFromConsole())));
 
 			return warranty;
 
@@ -119,13 +118,6 @@ public class GetDataFromConsole {
 		return company;
 	}
 
-	public static Integer makeScennerForBarCode() {
-		Scanner reader = new Scanner(System.in);
-		System.out.println("\nPlease enter the barCode of the item: ");
-		Integer barCode = reader.nextInt();
-		return barCode;
-	}
-
 	public static long getBarCodeFromConsole() {
 		Scanner reader = new Scanner(System.in);
 		long barCode;
@@ -140,7 +132,7 @@ public class GetDataFromConsole {
 		return barCode;
 	}
 
-	public static String getBarCodeToCheckWarrantyFromConsole(long barCode) {
+	public static String getWarrantyByBarCode(long barCode) {
 		Integer integerBarCode = (int) (long) barCode;
 			for (Entry<Integer, Milk> entry : Store.milkBar.entrySet()) {
 				Integer key = entry.getKey();
@@ -154,7 +146,7 @@ public class GetDataFromConsole {
 		return null;
 	}
 
-	public static String returnValueTester(String date)
+	public static String returnValueTesterForGetWarrantyByConsole(String date)
 	{
 		while (date == null) {
 			GetDataFromConsole.checkWarranty(GetDataFromConsole.warantyDateParser(),
