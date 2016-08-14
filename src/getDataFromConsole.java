@@ -2,7 +2,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class GetDataFromConsole {
@@ -27,8 +26,9 @@ public class GetDataFromConsole {
 		try {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date warranty = sdf.parse(returnValueTesterForGetWarrantyByConsole(getWarrantyByBarCode(getBarCodeFromConsole())));
-
+			Date warranty = sdf.parse(
+Milk.returnValueTesterForGetWarrantyByConsole(
+					Milk.getWarrantyByBarCode(getBarCodeFromConsole(), Store.milkBar)));
 			return warranty;
 
 		} catch (ParseException ex) {
@@ -122,7 +122,7 @@ public class GetDataFromConsole {
 		Scanner reader = new Scanner(System.in);
 		long barCode;
 		do {
-			System.out.println("Please enter the barCode of the ptoduct: ");
+			System.out.println("Please enter the barCode of the product: ");
 			while (!reader.hasNextInt()) {
 				System.out.println("This is not a barCode number! Please enter a valid: ");
 				reader.next();
@@ -132,28 +132,5 @@ public class GetDataFromConsole {
 		return barCode;
 	}
 
-	public static String getWarrantyByBarCode(long barCode) {
-		Integer integerBarCode = (int) (long) barCode;
-			for (Entry<Integer, Milk> entry : Store.milkBar.entrySet()) {
-				Integer key = entry.getKey();
-				Milk value = entry.getValue();
-			if (integerBarCode.equals(key)) {
-					System.out.println("The expire date of this product is: " + value.getWarrant());
-					return value.getWarrant();
-				}
-			}
-		System.out.println("There is no product with barCode like: " + barCode + " in the stock!");
-		return null;
-	}
-
-	public static String returnValueTesterForGetWarrantyByConsole(String date)
-	{
-		while (date == null) {
-			GetDataFromConsole.checkWarranty(GetDataFromConsole.warantyDateParser(),
-					GetDataFromConsole.nowDateParser());
-			Main.createMenuStuff();
-		}
-		return date;
-	}
 	
 }

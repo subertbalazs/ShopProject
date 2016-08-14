@@ -1,3 +1,7 @@
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Map.Entry;
+
 public class Milk {
 
 	private long barCode;
@@ -45,6 +49,31 @@ public class Milk {
 
 	public long getBarCode() {
 		return barCode;
+	}
+	
+	public static String getWarrantyByBarCode(long barCode, Hashtable bar) {
+		Integer integerBarCode = (int) (long) barCode;
+		for (Iterator<Entry<Integer, Milk>> i = bar.entrySet().iterator(); i.hasNext();) {
+			Entry<Integer, Milk> entry = i.next();
+			Integer key = entry.getKey();
+			Milk value = entry.getValue();
+			if (integerBarCode.equals(key)) {
+					System.out.println("The expire date of this product is: " + value.getWarrant());
+					return value.getWarrant();
+				}
+			}
+		System.out.println("There is no product with barCode like: " + barCode + " in the stock!");
+		return null;
+	}
+
+	public static String returnValueTesterForGetWarrantyByConsole(String date)
+	{
+		while (date == null) {
+			GetDataFromConsole.checkWarranty(GetDataFromConsole.warantyDateParser(),
+					GetDataFromConsole.nowDateParser());
+			Main.createMenuStuff();
+		}
+		return date;
 	}
 
 	public String toString() {
