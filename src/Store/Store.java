@@ -90,7 +90,7 @@ public class Store {
 		System.out.println("\nThe milkBar contains: \n" + milkBar.toString() + "\n");
 	}
 
-	private class StoreEntry {
+	public class StoreEntry {
 		Milk milk;
 		int quantity;
 		int price;

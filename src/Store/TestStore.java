@@ -7,6 +7,7 @@ import java.util.Hashtable;
 import org.junit.Test;
 
 import Milk.Milk;
+import Store.Store.StoreEntry;
 
 public class TestStore {
 
@@ -112,6 +113,55 @@ public class TestStore {
 		boolean result = Store.addMilkToMilkBar(milk, testHashTable);
 		assertEquals(result, true);
 		;
+	}
+
+	@Test
+	public void test_getMilk_ReturnTrue_inCaseOfCorrectValue() {
+		Store store = new Store("TestBolt", "Miskolc", "The Boss");
+		Milk milk = new Milk(1111, 1000, "1999-12-12", 1, 230, "testComp");
+		StoreEntry storeEntry = store.new StoreEntry(milk, 1, 230);
+		Milk result = storeEntry.getMilk();
+		assertEquals(result, milk);
+	}
+
+	@Test
+	public void test_getPrice_ReturnTure_inCaseOfCorrectValue() {
+		Store store = new Store("TestBolt", "Miskolc", "The Boss");
+		Milk milk = new Milk(1111, 1000, "1999-12-12", 1, 230, "testComp");
+		int price = 230;
+		StoreEntry storeEntry = store.new StoreEntry(milk, 1, 230);
+		int result = storeEntry.getPrice();
+		assertEquals(result, price);
+	}
+
+	@Test
+	public void test_getMilk_ReturnFalse_inCaseOfIncorrectValue() {
+		Store store = new Store("TestBolt", "Miskolc", "The Boss");
+		Milk milk = new Milk(1111, 1000, "1999-12-12", 1, 230, "testComp");
+		Integer price = 280;
+		StoreEntry storeEntry = store.new StoreEntry(milk, 1, 230);
+		Integer result = storeEntry.getPrice();
+		assertFalse(price.equals(result));
+	}
+
+	@Test
+	public void test_getQuantity_ReturnTure_inCaseOfCorrectValue() {
+		Store store = new Store("TestBolt", "Miskolc", "The Boss");
+		Milk milk = new Milk(1111, 1000, "1999-12-12", 1, 230, "testComp");
+		int price = 1;
+		StoreEntry storeEntry = store.new StoreEntry(milk, 1, 230);
+		int result = storeEntry.getQuantity();
+		assertEquals(result, price);
+	}
+
+	@Test
+	public void test_getQuantity_ReturnFalse_inCaseOfIncorrectValue() {
+		Store store = new Store("TestBolt", "Miskolc", "The Boss");
+		Milk milk = new Milk(1111, 1000, "1999-12-12", 1, 230, "testComp");
+		Integer price = 2;
+		StoreEntry storeEntry = store.new StoreEntry(milk, 1, 230);
+		Integer result = storeEntry.getQuantity();
+		assertFalse(price.equals(result));
 	}
 }
 
