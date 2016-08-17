@@ -126,7 +126,7 @@ Milk.returnValueTesterForGetWarrantyByConsole(
 		Scanner reader = new Scanner(System.in);
 		long barCode;
 		do {
-			System.out.println("Please enter the barCode of the product: ");
+			System.out.println("Please enter the barCode of the product (max 10 chars, numbers only): ");
 			while (!reader.hasNextInt()) {
 				System.out.println("This is not a barCode number! Please enter a valid: ");
 				reader.next();
@@ -136,5 +136,18 @@ Milk.returnValueTesterForGetWarrantyByConsole(
 		return barCode;
 	}
 
+	public static int getQuantityFromConsole() {
+		Scanner reader = new Scanner(System.in);
+		int quantity;
+		do {
+			System.out.println("Please enter the quantity (valid number): ");
+			while (!reader.hasNextInt()) {
+				System.out.println("This is not a number! Enter valid number: ");
+				reader.next();
+			}
+			quantity = reader.nextInt();
+		} while (quantity <= 0);
+		return quantity;
+	}
 	
 }

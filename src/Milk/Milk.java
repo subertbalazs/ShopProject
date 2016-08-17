@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 
 import Main.GetDataFromConsole;
 import Main.Menu;
+import Store.Store.StoreEntry;
 
 public class Milk {
 
@@ -18,16 +19,14 @@ public class Milk {
 	private int capacity;
 	private String warrant;
 	private double dripping;
-	private long price;
 	private String company;
 
-	public Milk(long barCode, int capacity, String warrant, double dripping, long price, String company) {
+	public Milk(long barCode, int capacity, String warrant, double dripping, String company) {
 		super();
 		this.barCode = barCode;
 		this.capacity = capacity;
 		this.warrant = warrant;
 		this.dripping = dripping;
-		this.price = price;
 		this.company = company;
 	}
 
@@ -43,10 +42,6 @@ public class Milk {
 		return dripping;
 	}
 
-	public long getPrice() {
-		return price;
-	}
-
 	public String getCompany() {
 		return company;
 	}
@@ -57,13 +52,13 @@ public class Milk {
 	
 	public static String getWarrantyByBarCode(long barCode, Hashtable bar) {
 		Integer integerBarCode = (int) (long) barCode;
-		for (Iterator<Entry<Integer, Milk>> i = bar.entrySet().iterator(); i.hasNext();) {
-			Entry<Integer, Milk> entry = i.next();
+		for (Iterator<Entry<Integer, StoreEntry>> i = bar.entrySet().iterator(); i.hasNext();) {
+			Entry<Integer, StoreEntry> entry = i.next();
 			Integer key = entry.getKey();
-			Milk value = entry.getValue();
+			StoreEntry value = entry.getValue();
 			if (integerBarCode.equals(key)) {
-					System.out.println("The expire date of this product is: " + value.getWarrant());
-					return value.getWarrant();
+				System.out.println("The expire date of this product is: " + value.getMilk().getWarrant());
+				return value.getMilk().getWarrant();
 				}
 			}
 		System.out.println("There is no product with barCode like: " + barCode + " in the stock!");
@@ -83,7 +78,7 @@ public class Milk {
 	public String toString() {
 		return "BarCode: " + barCode + "\n" + "Capacity: " + capacity + "\n" + "Warrant: " + warrant + "\n"
 				+ "Dripping: " + dripping + "\n"
-				+ "Price: " + price + " " + "\n" + "Company: " + company;
+ + "Company: " + company;
 	}
 
 }

@@ -11,10 +11,10 @@ public class Store {
 	private String name;
 	private String address;
 	private String owner;
-	public static Hashtable<Integer, Milk> milkBar = new Hashtable<>();
+	public static Hashtable<Integer, StoreEntry> milkBar = new Hashtable<>();
 	private int flag;
 
-	public Store(String name, String address, String owner, Hashtable<Integer, Milk> milkBar) {
+	public Store(String name, String address, String owner, Hashtable<Integer, StoreEntry> milkBar) {
 		super();
 		this.name = name;
 		this.address = address;
@@ -53,10 +53,10 @@ public class Store {
 
 	public static boolean buyMilk(long barCode, Hashtable bar) {
 		Integer integerBarCode = (int) (long) barCode;
-		for (Iterator<Entry<Integer, Milk>> i = bar.entrySet().iterator(); i.hasNext();) {
-			Entry<Integer, Milk> entry = i.next();
+		for (Iterator<Entry<Integer, StoreEntry>> i = bar.entrySet().iterator(); i.hasNext();) {
+			Entry<Integer, StoreEntry> entry = i.next();
 			Integer key = entry.getKey();
-			Milk value = entry.getValue();
+			StoreEntry value = entry.getValue();
 			if (integerBarCode.equals(key)) {
 				System.out.println(
 						"You chose: " + barCode + "\nThe product with this barCode is removed from the milkBar!");
@@ -72,13 +72,25 @@ public class Store {
 		Milk milkObject = new Milk(GetDataFromConsole.getBarCodeFromConsole(),
 				GetDataFromConsole.getCapacityFromConsole(),
 				GetDataFromConsole.getExpireDateFromConsole(), GetDataFromConsole.getDrippingFromConsole(),
-				GetDataFromConsole.getPriceFromConsole(), GetDataFromConsole.getCompanyFromConsole());
+ GetDataFromConsole.getCompanyFromConsole());
 		return milkObject;
 	}
 	
-	public static boolean addMilkToMilkBar(Milk milk, Hashtable bar) {
+	public static Store createStoreInstance() {
+		Store storeInstance = new Store("TestBolt", "Miskolc", "The Boss");
+		return storeInstance;
+	}
+
+	public static StoreEntry createStoreEntryInstance(Store store) {
+		StoreEntry storeEntryObject = store.new StoreEntry(createMilkInstance(),
+				GetDataFromConsole.getQuantityFromConsole(), GetDataFromConsole.getPriceFromConsole());
+
+		return storeEntryObject;
+	}
+
+	public static boolean addMilkToMilkBar(StoreEntry storeEntry, Hashtable bar) {
 		try {
-			milkBar.put((int) milk.getBarCode(), milk);
+			bar.put((int) storeEntry.milk.getBarCode(), storeEntry);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -93,9 +105,9 @@ public class Store {
 	public class StoreEntry {
 		Milk milk;
 		int quantity;
-		int price;
+		long price;
 
-		public StoreEntry(Milk milk, int quantity, int price) {
+		public StoreEntry(Milk milk, int quantity, long price) {
 			super();
 			this.milk = milk;
 			this.quantity = quantity;
@@ -118,7 +130,7 @@ public class Store {
 			this.quantity = quantity;
 		}
 
-		public int getPrice() {
+		public long getPrice() {
 			return price;
 		}
 
@@ -126,12 +138,17 @@ public class Store {
 			this.price = price;
 		}
 
+
 		public void increaseQuantity() {
 
 		}
 
 		public void decreaseQuantity() {
 
+		}
+
+		public String toString() {
+			return "Milk: " + milk + "\n" + "Price: " + price + "\n" + "Quantity: " + quantity + "\n";
 		}
 
 	}

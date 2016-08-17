@@ -33,20 +33,26 @@ public class Menu {
 	}
 
 	static void menuLogic(int choosen) {
-		if (choosen == 1) {
-			Store.addMilkToMilkBar(Store.createMilkInstance(), Store.milkBar);
+		final int addMilk = 1;
+		final int isThereMilk = 2;
+		final int buyMilk = 3;
+		final int checkWarranty = 4;
+
+		if (choosen == addMilk) {
+			Store.addMilkToMilkBar(Store.createStoreEntryInstance(Store.createStoreInstance()), Store.milkBar);
+			// Store.createMilkInstance(), Store.milkBar)
 			Store.printMilkBar();
 			createMenuStuff();
-		} else if (choosen == 2) {
+		} else if (choosen == isThereMilk) {
 			Store.isThereAnyMilk(Store.milkBar);
 			Store.printMilkBar();
 			createMenuStuff();
-		} else if (choosen == 3) {
+		} else if (choosen == buyMilk) {
 			if (!Store.isThereAnyMilk(Store.milkBar)) {
 				Store.buyMilk(GetDataFromConsole.getBarCodeFromConsole(), Store.milkBar);
 			}
 			createMenuStuff();
-		} else if (choosen == 4) {
+		} else if (choosen == checkWarranty) {
 			if (!Store.isThereAnyMilk(Store.milkBar)) {
 				GetDataFromConsole.checkWarranty(GetDataFromConsole.warantyDateParser(),
 						GetDataFromConsole.nowDateParser());
