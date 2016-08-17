@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import Main.GetDataFromConsole;
-import Main.Main;
+import Main.Menu;
 
 public class Milk {
 
@@ -75,7 +75,7 @@ public class Milk {
 		while (date == null) {
 			GetDataFromConsole.checkWarranty(GetDataFromConsole.warantyDateParser(),
 					GetDataFromConsole.nowDateParser());
-			Main.createMenuStuff();
+			Menu.createMenuStuff();
 		}
 		return date;
 	}

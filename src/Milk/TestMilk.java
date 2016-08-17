@@ -20,9 +20,9 @@ public class TestMilk {
 	@Test
 	public void test_getCapacity_ReturnFalse_inCaseOfIncorrectValue() {
 		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, 230, "test");
-		Integer capacity = 500;
-		Integer result = milk.getCapacity();
-		assertFalse(capacity.equals(result));
+		int capacity = 500;
+		int result = milk.getCapacity();
+		assertFalse(capacity == result);
 	}
 
 	@Test
