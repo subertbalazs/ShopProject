@@ -67,13 +67,15 @@ public class Store {
 						return true;
 					}
  else if (decreaser > value.getQuantity()) {
-						System.out.println("There is less than " + decreaser + " box of " + barCode + ".(Quantity: "
+						System.out.println("There is less than " + decreaser + " box of the product with barCode: "
+								+ barCode + ". (Quantity: "
 								+ value.getQuantity() + ")");
 						return false;
 					}
  else {
 					value.decreaseQuantity(decreaser);
-					System.out.println("You bought " + decreaser + "box of this barCode: " + barCode + ".");
+						System.out
+								.println("You bought " + decreaser + " of the product with barCode: " + barCode + ".");
 					return true;
 					}
 				}
@@ -109,7 +111,7 @@ public class Store {
 		return storeEntryObject;
 	}
 
-	public static boolean addMilkToMilkBar(StoreEntry storeEntry, Hashtable bar) {
+	public static boolean addNewMilkToMilkBar(StoreEntry storeEntry, Hashtable bar) {
 		try {
 			bar.put((int) storeEntry.milk.getBarCode(), storeEntry);
 		} catch (Exception e) {
@@ -119,7 +121,25 @@ public class Store {
 		return true;
 	}
 
-	public static void printMilkBar() {
+	public static boolean addExistingMilk(long barCode, Hashtable bar) {
+		Integer integerBarCode = (int) (long) barCode;
+		for (Iterator<Entry<Integer, StoreEntry>> i = bar.entrySet().iterator(); i.hasNext();) {
+			Entry<Integer, StoreEntry> entry = i.next();
+			Integer key = entry.getKey();
+			StoreEntry value = entry.getValue();
+			if (integerBarCode.equals(key)) {
+				int increaser = GetDataFromConsole.getQuantityFromConsole();
+				value.increaseQuantity(increaser);
+				System.out.println("The quantity of the product with " + barCode + " is increased with " + increaser
+						+ " (Total: " + value.getQuantity() + ")");
+				return true;
+			}
+		}
+		System.out.println("There is no product with barCode like: " + barCode + " in the stock!");
+		return false;
+	}
+
+ 	public static void printMilkBar() {
 		System.out.println("\nThe milkBar contains: \n" + milkBar.toString() + "\n");
 	}
 
@@ -159,8 +179,8 @@ public class Store {
 			this.price = price;
 		}
 
-		public void increaseQuantity() {
-			this.quantity += quantity;
+		public void increaseQuantity(int incQuantity) {
+			this.quantity += incQuantity;
 		}
 		
 		public void decreaseQuantity(int decQuantity) {

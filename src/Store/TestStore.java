@@ -108,7 +108,7 @@ public class TestStore {
 		Store store = new Store("TestBolt", "Miskolc", "The Boss");
 		Milk milk = new Milk(1111, 1000, "2017-11-11", 1, "testCompany");
 		StoreEntry storeEntry = store.new StoreEntry(milk, 1, 230);
-		boolean result = Store.addMilkToMilkBar(storeEntry, testHashTable);
+		boolean result = Store.addNewMilkToMilkBar(storeEntry, testHashTable);
 		assertEquals(result, true);
 		;
 	}
