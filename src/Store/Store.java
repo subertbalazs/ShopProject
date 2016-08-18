@@ -59,11 +59,24 @@ public class Store {
 			StoreEntry value = entry.getValue();
 			if (integerBarCode.equals(key)) {
 				if (value.getQuantity() > 1) {
-					value.decreaseQuantity();
-					System.out.println("You have bought 1 ");
+					int decreaser = GetDataFromConsole.getQuantityFromConsole();
+					if (decreaser == value.getQuantity()) {
+						System.out.println("You chose: " + barCode
+								+ "\nThe product with this barCode is removed from the milkBar!");
+						i.remove();
+						return true;
+					}
+ else if (decreaser > value.getQuantity()) {
+						System.out.println("There is less than " + decreaser + " box of " + barCode + ".(Quantity: "
+								+ value.getQuantity() + ")");
+						return false;
+					}
+ else {
+					value.decreaseQuantity(decreaser);
+					System.out.println("You bought " + decreaser + "box of this barCode: " + barCode + ".");
 					return true;
+					}
 				}
-
 				else {
 				System.out.println(
 						"You chose: " + barCode + "\nThe product with this barCode is removed from the milkBar!");
@@ -71,8 +84,8 @@ public class Store {
 				return true;
 				}
 			}
-			System.out.println("There is no product with barCode like: " + barCode + " in the stock!");
 		}
+		System.out.println("There is no product with barCode like: " + barCode + " in the stock!");
 		return false;
 	}
 
@@ -150,8 +163,8 @@ public class Store {
 			this.quantity += quantity;
 		}
 		
-		public void decreaseQuantity() {
-			this.quantity -= 1;
+		public void decreaseQuantity(int decQuantity) {
+			this.quantity -= decQuantity;
 		}
 
 		public String toString() {
