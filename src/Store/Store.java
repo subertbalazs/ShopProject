@@ -58,13 +58,21 @@ public class Store {
 			Integer key = entry.getKey();
 			StoreEntry value = entry.getValue();
 			if (integerBarCode.equals(key)) {
+				if (value.getQuantity() > 1) {
+					value.decreaseQuantity();
+					System.out.println("You have bought 1 ");
+					return true;
+				}
+
+				else {
 				System.out.println(
 						"You chose: " + barCode + "\nThe product with this barCode is removed from the milkBar!");
 				i.remove();
 				return true;
+				}
 			}
+			System.out.println("There is no product with barCode like: " + barCode + " in the stock!");
 		}
-		System.out.println("There is no product with barCode like: " + barCode + " in the stock!");
 		return false;
 	}
 
@@ -138,13 +146,12 @@ public class Store {
 			this.price = price;
 		}
 
-
 		public void increaseQuantity() {
-
+			this.quantity += quantity;
 		}
-
+		
 		public void decreaseQuantity() {
-
+			this.quantity -= 1;
 		}
 
 		public String toString() {
