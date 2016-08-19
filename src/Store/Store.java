@@ -4,7 +4,9 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import Main.GetDataFromConsole;
+import Milk.LongLifeMilk;
 import Milk.Milk;
+import Milk.SemiLongLifeMilk;
 
 public class Store {
 
@@ -91,12 +93,19 @@ public class Store {
 		return false;
 	}
 
-	public static Milk createMilkInstance() {
-		Milk milkObject = new Milk(GetDataFromConsole.getBarCodeFromConsole(),
+	public static Milk createLongLifeMilkInstance() {
+		Milk milkObjectLL = new LongLifeMilk(GetDataFromConsole.getBarCodeFromConsole(),
+				GetDataFromConsole.getCapacityFromConsole(), GetDataFromConsole.getExpireDateFromConsole(),
+				GetDataFromConsole.getDrippingFromConsole(), GetDataFromConsole.getCompanyFromConsole());
+		return milkObjectLL;
+	}
+
+	public static Milk createSemiLongLifeMilkInstance() {
+		Milk milkObjectSLL = new SemiLongLifeMilk(GetDataFromConsole.getBarCodeFromConsole(),
 				GetDataFromConsole.getCapacityFromConsole(),
 				GetDataFromConsole.getExpireDateFromConsole(), GetDataFromConsole.getDrippingFromConsole(),
  GetDataFromConsole.getCompanyFromConsole());
-		return milkObject;
+		return milkObjectSLL;
 	}
 	
 	public static Store createStoreInstance() {
@@ -104,8 +113,15 @@ public class Store {
 		return storeInstance;
 	}
 
-	public static StoreEntry createStoreEntryInstance(Store store) {
-		StoreEntry storeEntryObject = store.new StoreEntry(createMilkInstance(),
+	public static StoreEntry createStoreEntryInstanceLongLife(Store store) {
+		StoreEntry storeEntryObject = store.new StoreEntry(createLongLifeMilkInstance(),
+				GetDataFromConsole.getQuantityFromConsole(), GetDataFromConsole.getPriceFromConsole());
+
+		return storeEntryObject;
+	}
+
+	public static StoreEntry createStoreEntryInstanceSemiLongLife(Store store) {
+		StoreEntry storeEntryObject = store.new StoreEntry(createSemiLongLifeMilkInstance(),
 				GetDataFromConsole.getQuantityFromConsole(), GetDataFromConsole.getPriceFromConsole());
 
 		return storeEntryObject;

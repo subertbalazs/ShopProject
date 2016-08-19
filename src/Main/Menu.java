@@ -24,7 +24,25 @@ public class Menu {
 		return menuItem;
 	}
 
-	static int subMenuItemScanner() {
+	static int addMilkSubMenuItemScanner() {
+
+		Scanner reader = new Scanner(System.in);
+		int minimumMenuItem = 0;
+		int maximumMenuItem = 2;
+		int menuItem;
+		do {
+			System.out.println("Please enter the number of the menu item you would like to choose: ");
+			while (!reader.hasNextInt()) {
+				System.out.println("This is not a number! Please enter the number of a the menu item: ");
+				reader.next();
+			}
+			menuItem = reader.nextInt();
+		} while (menuItem <= minimumMenuItem || menuItem > maximumMenuItem);
+		// clearScreen();
+		return menuItem;
+	}
+
+	static int milkLifeSubMenuItemScanner() {
 
 		Scanner reader = new Scanner(System.in);
 		int minimumMenuItem = 0;
@@ -50,10 +68,17 @@ public class Menu {
 		System.out.println("4 - Check warranty");
 	}
 
-	static void drawSubMenu() {
+	static void drawAddMilkSubMenu() {
 		System.out.println("---=== ADD MILK SUBMENU ===---");
 		System.out.println("1 - Add milk to the stock with NEW barcode");
 		System.out.println("2 - Add milk to the stock with EXISTING barcode");
+
+	}
+
+	static void drawMilkLifeSubMenu() {
+		System.out.println("---=== MILK LIFE SUBMENU ===---");
+		System.out.println("1 - Add LONG-LIFE milk to the stock");
+		System.out.println("2 - Add SEMI-LONG-LIFE milk to the stock");
 
 	}
 
@@ -64,8 +89,8 @@ public class Menu {
 		final int checkWarranty = 4;
 
 		if (chosen == addMilk) {
-			drawSubMenu();
-			subMenuLogic(subMenuItemScanner());
+			drawAddMilkSubMenu();
+			addMilkSubMenuLogic(addMilkSubMenuItemScanner());
 
 		} else if (chosen == isThereMilk) {
 			Store.isThereAnyMilk(Store.milkBar);
@@ -86,18 +111,35 @@ public class Menu {
 		}
 	}
 
-	static void subMenuLogic(int chosen) {
+	static void addMilkSubMenuLogic(int chosen) {
 		final int newMilk = 1;
 		final int existingMilk = 2;
 
 		if (chosen == newMilk) {
-			Store.addNewMilkToMilkBar(Store.createStoreEntryInstance(Store.createStoreInstance()), Store.milkBar);
-			Store.printMilkBar();
-			createMenuStuff();
+			drawMilkLifeSubMenu();
+			milkLifeMenuLogic(addMilkSubMenuItemScanner());
 		} else if (chosen == existingMilk) {
 			if (!Store.isThereAnyMilk(Store.milkBar)) {
 				Store.addExistingMilk(GetDataFromConsole.getBarCodeFromConsole(), Store.milkBar);
 			}
+			createMenuStuff();
+		}
+		createMenuStuff();
+	}
+
+	static void milkLifeMenuLogic(int chosen) {
+		final int longLife = 1;
+		final int semiLongLife = 2;
+
+		if (chosen == longLife) {
+			Store.addNewMilkToMilkBar(Store.createStoreEntryInstanceLongLife(Store.createStoreInstance()),
+					Store.milkBar);
+			Store.printMilkBar();
+			createMenuStuff();
+		} else if (chosen == semiLongLife) {
+			Store.addNewMilkToMilkBar(Store.createStoreEntryInstanceSemiLongLife(Store.createStoreInstance()),
+					Store.milkBar);
+			Store.printMilkBar();
 			createMenuStuff();
 		}
 		createMenuStuff();
