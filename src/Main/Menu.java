@@ -2,7 +2,7 @@ package Main;
 
 import java.util.Scanner;
 
-import Store.Store;
+import store.Store;
 
 public class Menu {
 

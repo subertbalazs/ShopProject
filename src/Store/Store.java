@@ -1,15 +1,15 @@
-package Store;
+package store;
 
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import Cheese.Cheese;
 import Main.GetDataFromConsole;
-import Milk.LongLifeMilk;
-import Milk.Milk;
-import Milk.SemiLongLifeMilk;
-import Products.Food;
+import products.Cheese;
+import products.Food;
+import products.LongLifeMilk;
+import products.Milk;
+import products.SemiLongLifeMilk;
 
 public class Store {
 

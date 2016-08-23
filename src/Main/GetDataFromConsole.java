@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Scanner;
 
-import Products.Food;
-import Store.Store;
+import products.Food;
+import store.Store;
 
 public class GetDataFromConsole {
 

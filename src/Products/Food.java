@@ -1,4 +1,4 @@
-package Products;
+package products;
 
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 
 import Main.GetDataFromConsole;
 import Main.Menu;
-import Store.Store.StoreEntry;
+import store.Store.StoreEntry;
 
 public class Food {
 
