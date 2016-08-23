@@ -1,27 +1,30 @@
 package Store;
+
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import Cheese.Cheese;
 import Main.GetDataFromConsole;
 import Milk.LongLifeMilk;
 import Milk.Milk;
 import Milk.SemiLongLifeMilk;
+import Products.Food;
 
 public class Store {
 
 	private String name;
 	private String address;
 	private String owner;
-	public static Hashtable<Integer, StoreEntry> milkBar = new Hashtable<>();
+	public static Hashtable<Integer, StoreEntry> grocery = new Hashtable<>();
 	private int flag;
 
-	public Store(String name, String address, String owner, Hashtable<Integer, StoreEntry> milkBar) {
+	public Store(String name, String address, String owner, Hashtable<Integer, StoreEntry> grocery) {
 		super();
 		this.name = name;
 		this.address = address;
 		this.owner = owner;
-		this.milkBar = milkBar;
+		this.grocery = grocery;
 	}
 
 	public Store(String name, String address, String owner) {
@@ -45,10 +48,9 @@ public class Store {
 
 	public static boolean isThereAnyMilk(Hashtable bar) {
 		if (bar.isEmpty()) {
-			System.out.println("\nThe milk is over.");
+			System.out.println("\nThe stock is empty.");
 			return true;
 		}
-		System.out.println("\nThe milk is not over yet.");
 		System.out.println("\nThe milkBar contains: \n" + bar.toString());
 		return false;
 	}
@@ -67,25 +69,21 @@ public class Store {
 								+ "\nThe product with this barCode is removed from the milkBar!");
 						i.remove();
 						return true;
-					}
- else if (decreaser > value.getQuantity()) {
+					} else if (decreaser > value.getQuantity()) {
 						System.out.println("There is less than " + decreaser + " box of the product with barCode: "
-								+ barCode + ". (Quantity: "
-								+ value.getQuantity() + ")");
+								+ barCode + ". (Quantity: " + value.getQuantity() + ")");
 						return false;
-					}
- else {
-					value.decreaseQuantity(decreaser);
+					} else {
+						value.decreaseQuantity(decreaser);
 						System.out
 								.println("You bought " + decreaser + " of the product with barCode: " + barCode + ".");
-					return true;
+						return true;
 					}
-				}
-				else {
-				System.out.println(
-						"You chose: " + barCode + "\nThe product with this barCode is removed from the milkBar!");
-				i.remove();
-				return true;
+				} else {
+					System.out.println(
+							"You chose: " + barCode + "\nThe product with this barCode is removed from the milkBar!");
+					i.remove();
+					return true;
 				}
 			}
 		}
@@ -102,12 +100,18 @@ public class Store {
 
 	public static Milk createSemiLongLifeMilkInstance() {
 		Milk milkObjectSLL = new SemiLongLifeMilk(GetDataFromConsole.getBarCodeFromConsole(),
-				GetDataFromConsole.getCapacityFromConsole(),
-				GetDataFromConsole.getExpireDateFromConsole(), GetDataFromConsole.getDrippingFromConsole(),
- GetDataFromConsole.getCompanyFromConsole());
+				GetDataFromConsole.getCapacityFromConsole(), GetDataFromConsole.getExpireDateFromConsole(),
+				GetDataFromConsole.getDrippingFromConsole(), GetDataFromConsole.getCompanyFromConsole());
 		return milkObjectSLL;
 	}
-	
+
+	public static Cheese createCheeseInstance() {
+		Cheese cheeseObj = new Cheese(GetDataFromConsole.getBarCodeFromConsole(),
+				GetDataFromConsole.getWeightFromConsole(), GetDataFromConsole.getExpireDateFromConsole(),
+				GetDataFromConsole.getDrippingFromConsole(), GetDataFromConsole.getCompanyFromConsole());
+		return cheeseObj;
+	}
+
 	public static Store createStoreInstance() {
 		Store storeInstance = new Store("TestBolt", "Miskolc", "The Boss");
 		return storeInstance;
@@ -127,9 +131,16 @@ public class Store {
 		return storeEntryObject;
 	}
 
-	public static boolean addNewMilkToMilkBar(StoreEntry storeEntry, Hashtable bar) {
+	public static StoreEntry createStoreEntryInstanceCheese(Store store) {
+		StoreEntry storeEntryObject = store.new StoreEntry(createCheeseInstance(),
+				GetDataFromConsole.getQuantityFromConsole(), GetDataFromConsole.getPriceFromConsole());
+
+		return storeEntryObject;
+	}
+
+	public static boolean addNewProductToStore(StoreEntry storeEntry, Hashtable store) {
 		try {
-			bar.put((int) storeEntry.milk.getBarCode(), storeEntry);
+			store.put((int) storeEntry.food.getBarCode(), storeEntry);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -137,9 +148,9 @@ public class Store {
 		return true;
 	}
 
-	public static boolean addExistingMilk(long barCode, Hashtable bar) {
+	public static boolean addExistingProduct(long barCode, Hashtable store) {
 		Integer integerBarCode = (int) (long) barCode;
-		for (Iterator<Entry<Integer, StoreEntry>> i = bar.entrySet().iterator(); i.hasNext();) {
+		for (Iterator<Entry<Integer, StoreEntry>> i = store.entrySet().iterator(); i.hasNext();) {
 			Entry<Integer, StoreEntry> entry = i.next();
 			Integer key = entry.getKey();
 			StoreEntry value = entry.getValue();
@@ -155,28 +166,28 @@ public class Store {
 		return false;
 	}
 
- 	public static void printMilkBar() {
-		System.out.println("\nThe milkBar contains: \n" + milkBar.toString() + "\n");
+	public static void printStore() {
+		System.out.println("\nThe store contains: \n" + grocery.toString() + "\n");
 	}
 
 	public class StoreEntry {
-		Milk milk;
+		Food food;
 		int quantity;
 		long price;
 
-		public StoreEntry(Milk milk, int quantity, long price) {
+		public StoreEntry(Food food, int quantity, long price) {
 			super();
-			this.milk = milk;
+			this.food = food;
 			this.quantity = quantity;
 			this.price = price;
 		}
 
-		public Milk getMilk() {
-			return milk;
+		public Food getMilk() {
+			return food;
 		}
 
-		public void setMilk(Milk milk) {
-			this.milk = milk;
+		public void setMilk(Food milk) {
+			this.food = milk;
 		}
 
 		public int getQuantity() {
@@ -198,13 +209,13 @@ public class Store {
 		public void increaseQuantity(int incQuantity) {
 			this.quantity += incQuantity;
 		}
-		
+
 		public void decreaseQuantity(int decQuantity) {
 			this.quantity -= decQuantity;
 		}
 
 		public String toString() {
-			return "Milk: " + milk + "\n" + "Price: " + price + "\n" + "Quantity: " + quantity + "\n";
+			return "Food: " + food + "\n" + "Price: " + price + "\n" + "Quantity: " + quantity + "\n" + food.getClass();
 		}
 
 	}

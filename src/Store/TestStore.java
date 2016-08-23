@@ -6,7 +6,9 @@ import java.util.Hashtable;
 
 import org.junit.Test;
 
+import Milk.LongLifeMilk;
 import Milk.Milk;
+import Products.Food;
 import Store.Store.StoreEntry;
 
 public class TestStore {
@@ -70,7 +72,7 @@ public class TestStore {
 	public void test_buyMilk_returnFalse_inCaseOfOneItemWithWrongKey() {
 		Hashtable<Integer, StoreEntry> testHashTable = new Hashtable<>();
 		Store store = new Store("TestBolt", "Miskolc", "The Boss");
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, "test");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1, "test");
 		StoreEntry storeEntry1 = store.new StoreEntry(milk, 2, 230);
 		testHashTable.put(1, storeEntry1);
 		int barCode = 2;
@@ -81,7 +83,7 @@ public class TestStore {
 	public void test_buyMilk_returnTrue_inCaseOfOneItemWithCorrectKey() {
 		Hashtable<Integer, StoreEntry> testHashTable = new Hashtable<>();
 		Store store = new Store("TestBolt", "Miskolc", "The Boss");
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, "test");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1, "test");
 		StoreEntry storeEntry1 = store.new StoreEntry(milk, 2, 230);
 		testHashTable.put(1111, storeEntry1);
 		int barCode = 1111;
@@ -92,8 +94,8 @@ public class TestStore {
 	public void test_buyMilk_returnTrue_inCaseOfMultipleItemWithCorrectKey() {
 		Hashtable<Integer, StoreEntry> testHashTable = new Hashtable<>();
 		Store store = new Store("TestBolt", "Miskolc", "The Boss");
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, "test");
-		Milk milk2 = new Milk(2222, 500, "2012-11-11", 1, "test2");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1, "test");
+		Milk milk2 = new LongLifeMilk(2222, 500, "2012-11-11", 1, "test2");
 		StoreEntry storeEntry1 = store.new StoreEntry(milk, 1, 230);
 		StoreEntry storeEntry2 = store.new StoreEntry(milk2, 2, 240);
 		testHashTable.put(1111, storeEntry1);
@@ -106,24 +108,24 @@ public class TestStore {
 	public void test_addMilkToMilkBar_returnTrue_inCaseOfOneObject() {
 		Hashtable testHashTable = new Hashtable<>();
 		Store store = new Store("TestBolt", "Miskolc", "The Boss");
-		Milk milk = new Milk(1111, 1000, "2017-11-11", 1, "testCompany");
+		Milk milk = new LongLifeMilk(1111, 1000, "2017-11-11", 1, "testCompany");
 		StoreEntry storeEntry = store.new StoreEntry(milk, 1, 230);
-		boolean result = Store.addNewMilkToMilkBar(storeEntry, testHashTable);
+		boolean result = Store.addNewProductToStore(storeEntry, testHashTable);
 		assertEquals(result, true);
 		;
 	}
 	@Test
 	public void test_getMilk_ReturnTrue_inCaseOfCorrectValue() {
 		Store store = new Store("TestBolt", "Miskolc", "The Boss");
-		Milk milk = new Milk(1111, 1000, "1999-12-12", 1, "testComp");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-12-12", 1, "testComp");
 		StoreEntry storeEntry = store.new StoreEntry(milk, 1, 230);
-		Milk result = storeEntry.getMilk();
+		Food result = storeEntry.getMilk();
 		assertEquals(result, milk);
 	}
 	@Test
 	public void test_getPrice_ReturnTure_inCaseOfCorrectValue() {
 		Store store = new Store("TestBolt", "Miskolc", "The Boss");
-		Milk milk = new Milk(1111, 1000, "1999-12-12", 1, "testComp");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-12-12", 1, "testComp");
 		long price = 230;
 		StoreEntry storeEntry = store.new StoreEntry(milk, 1, 230);
 		long result = storeEntry.getPrice();
@@ -132,7 +134,7 @@ public class TestStore {
 	@Test
 	public void test_getMilk_ReturnFalse_inCaseOfIncorrectValue() {
 		Store store = new Store("TestBolt", "Miskolc", "The Boss");
-		Milk milk = new Milk(1111, 1000, "1999-12-12", 1, "testComp");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-12-12", 1, "testComp");
 		long price = 280;
 		StoreEntry storeEntry = store.new StoreEntry(milk, 1, 230);
 		long result = storeEntry.getPrice();
@@ -141,7 +143,7 @@ public class TestStore {
 	@Test
 	public void test_getQuantity_ReturnTure_inCaseOfCorrectValue() {
 		Store store = new Store("TestBolt", "Miskolc", "The Boss");
-		Milk milk = new Milk(1111, 1000, "1999-12-12", 1, "testComp");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-12-12", 1, "testComp");
 		int price = 1;
 		StoreEntry storeEntry = store.new StoreEntry(milk, 1, 230);
 		int result = storeEntry.getQuantity();
@@ -150,7 +152,7 @@ public class TestStore {
 	@Test
 	public void test_getQuantity_ReturnFalse_inCaseOfIncorrectValue() {
 		Store store = new Store("TestBolt", "Miskolc", "The Boss");
-		Milk milk = new Milk(1111, 1000, "1999-12-12", 1, "testComp");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-12-12", 1, "testComp");
 		Integer price = 2;
 		StoreEntry storeEntry = store.new StoreEntry(milk, 1, 230);
 		Integer result = storeEntry.getQuantity();

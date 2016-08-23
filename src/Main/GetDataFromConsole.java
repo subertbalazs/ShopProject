@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Scanner;
 
-import Milk.Milk;
+import Products.Food;
 import Store.Store;
 
 public class GetDataFromConsole {
@@ -31,8 +31,8 @@ public class GetDataFromConsole {
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date warranty = sdf.parse(
-Milk.returnValueTesterForGetWarrantyByConsole(
-					Milk.getWarrantyByBarCode(getBarCodeFromConsole(), Store.milkBar)));
+Food.returnValueTesterForGetWarrantyByConsole(
+					Food.getWarrantyByBarCode(getBarCodeFromConsole(), Store.grocery)));
 			return warranty;
 
 		} catch (ParseException ex) {
@@ -59,11 +59,11 @@ Milk.returnValueTesterForGetWarrantyByConsole(
 	public static boolean checkWarranty(Date warranty, Date now) {
 
 		if (warranty.after(now)) {
-			System.out.println("The milk is not expired yet.\n");
+			System.out.println("The product is not expired yet.\n");
 			return true;
 		}
 		if (warranty.before(now)) {
-			System.out.println("The milk is expired.\n");
+			System.out.println("The product is expired.\n");
 			return false;
 		}
 		if (warranty.equals(now)) {
@@ -77,7 +77,7 @@ Milk.returnValueTesterForGetWarrantyByConsole(
 		Scanner reader = new Scanner(System.in);
 		int capacity;
 		do {
-			System.out.println("Please enter the capacity in ml (valid format: 500,1000 or 1500 etc.): ");
+			System.out.println("Please enter the capacity in ml (valid format: 500,1000 or 1500 etc., max 10 chars): ");
 			while (!reader.hasNextInt()) {
 				System.out.println("This is not a number! Enter valid number: ");
 				reader.next();
@@ -85,6 +85,20 @@ Milk.returnValueTesterForGetWarrantyByConsole(
 			capacity = reader.nextInt();
 		} while (capacity <= 0);
 		return capacity;
+	}
+
+	public static double getWeightFromConsole() {
+		Scanner reader = new Scanner(System.in);
+		double weight;
+		do {
+			System.out.println("Please enter the weight (valid format: 1,5 or 2,8 or 3,5 etc., max 10 chars): ");
+			while (!reader.hasNextDouble()) {
+				System.out.println("Please enter a number(This is not valid format: 1.5, max 10 chars): ");
+				reader.next();
+			}
+			weight = reader.nextDouble();
+		} while (weight <= 0);
+		return weight;
 	}
 
 	public static double getDrippingFromConsole() {
@@ -105,7 +119,7 @@ Milk.returnValueTesterForGetWarrantyByConsole(
 		Scanner reader = new Scanner(System.in);
 		long price;
 		do {
-			System.out.println("Please enter the price in Ft (valid format: 280 etc.): ");
+			System.out.println("Please enter the price in Ft (valid format: 280 etc., max 10 chars): ");
 			while (!reader.hasNextInt()) {
 				System.out.println("This is not a number! Enter valid number: ");
 				reader.next();
@@ -140,7 +154,7 @@ Milk.returnValueTesterForGetWarrantyByConsole(
 		Scanner reader = new Scanner(System.in);
 		int quantity;
 		do {
-			System.out.println("Please enter the quantity (valid number): ");
+			System.out.println("Please enter the quantity (valid number, max 10 chars): ");
 			while (!reader.hasNextInt()) {
 				System.out.println("This is not a number! Enter valid number: ");
 				reader.next();

@@ -14,70 +14,70 @@ public class TestMilk {
 
 	@Test
 	public void test_getCapacity_ReturnTrue_inCaseOfCorrectValue() {
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, "test");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1, "test");
 		int capacity = 1000;
 		int result = milk.getCapacity();
 		assertEquals(result, capacity);
 	}
 	@Test
 	public void test_getCapacity_ReturnFalse_inCaseOfIncorrectValue() {
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, "test");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1, "test");
 		int capacity = 500;
 		int result = milk.getCapacity();
 		assertFalse(capacity == result);
 	}
 	@Test
 	public void test_getWarrant_ReturnTrue_inCaseOfCorrectValue() {
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, "test");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1, "test");
 		String warranty = "1999-11-11";
 		String result = milk.getWarrant();
 		assertEquals(result, warranty);
 	}
 	@Test
 	public void test_getWarrant_ReturnTrue_inCaseOfIncorrectValue() {
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, "test");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1, "test");
 		String warranty = "2111-11-11";
 		String result = milk.getWarrant();
 		assertFalse(warranty.equals(result));
 	}
 	@Test
 	public void test_getDripping_ReturnTrue_inCaseOfCorrectValue() {
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1.0, "test");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1.0, "test");
 		Double dripping = 1.0;
 		Double result = milk.getDripping();
 		assertTrue(dripping.equals(result));
 	}
 	@Test
 	public void test_getDripping_ReturnFalse_inCaseOfIncorrectValue() {
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1.0, "test");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1.0, "test");
 		Double dripping = 2.0;
 		Double result = milk.getDripping();
 		assertFalse(dripping.equals(result));
 	}
 	@Test
 	public void test_getCompany_ReturnTrue_inCaseOfCorrectValue() {
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, "test");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1, "test");
 		String company = "test";
 		String result = milk.getCompany();
 		assertEquals(result, company);
 	}
 	@Test
 	public void test_getCompany_ReturnFalse_inCaseOfIncorrectValue() {
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, "test");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1, "test");
 		String company = "hello";
 		String result = milk.getCompany();
 		assertFalse(company.equals(result));
 	}
 	@Test
 	public void test_getBarCode_ReturnTrue_inCaseOfCorrectValue() {
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, "test");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1, "test");
 		Long barCode = (long) 1111;
 		Long result = milk.getBarCode();
 		assertEquals(result, barCode);
 	}
 	@Test
 	public void test_getBarCode_ReturnFalse_inCaseOfIncorrectValue() {
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, "test");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1, "test");
 		Long price = (long) 1000;
 		Long result = milk.getBarCode();
 		assertFalse(price.equals(result));
@@ -93,7 +93,7 @@ public class TestMilk {
 	public void test_getWarrantyByBarCode_ReturnBarCode_inCaseOfCorrectBarCode() {
 		Hashtable<Integer, StoreEntry> testHashTable = new Hashtable<>();
 		Store store = new Store("TestBolt", "Miskolc", "The Boss");
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, "test");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1, "test");
 		StoreEntry storeEntry = store.new StoreEntry(milk, 1, 230);
 		testHashTable.put(1111, storeEntry);
 		int barCode = 1111;
@@ -104,7 +104,7 @@ public class TestMilk {
 	public void test_getWarrantyByBarCode_ReturnNull_inCaseOfIncorrectBarCode() {
 		Hashtable<Integer, StoreEntry> testHashTable = new Hashtable<>();
 		Store store = new Store("TestBolt", "Miskolc", "The Boss");
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, "test");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1, "test");
 		StoreEntry storeEntry = store.new StoreEntry(milk, 1, 230);
 		testHashTable.put(1111, storeEntry);
 		int barCode = 2222;
@@ -115,8 +115,8 @@ public class TestMilk {
 	public void test_getWarrantyByBarCode_ReturnBarCode_inCaseOfMulitpleItemAndCorrectBarCode() {
 		Hashtable<Integer, StoreEntry> testHashTable = new Hashtable<>();
 		Store store = new Store("TestBolt", "Miskolc", "The Boss");
-		Milk milk = new Milk(1111, 1000, "1999-11-11", 1, "test");
-		Milk milk2 = new Milk(2222, 500, "2017-11-11", 2, "test2");
+		Milk milk = new LongLifeMilk(1111, 1000, "1999-11-11", 1, "test");
+		Milk milk2 = new LongLifeMilk(2222, 500, "2017-11-11", 2, "test2");
 		StoreEntry storeEntry1 = store.new StoreEntry(milk, 1, 230);
 		StoreEntry storeEntry2 = store.new StoreEntry(milk2, 2, 240);
 		testHashTable.put(1111, storeEntry1);
