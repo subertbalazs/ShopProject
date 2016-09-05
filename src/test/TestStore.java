@@ -52,14 +52,14 @@ public class TestStore {
 	@Test
 	public void test_isTHereAnyMilk_returnTrue_inCaseOfEmptyHashTable() {
 		Hashtable testHashTable = new Hashtable<>();
-		boolean result = Store.isThereAnyMilk(testHashTable);
+		boolean result = Store.isThereAnyFood(testHashTable);
 		assertEquals(result, true);
 	}
 	@Test
 	public void test_isTHereAnyMilk_returnFalse_inCaseOfHashTableWithOneItem() {
 		Hashtable testHashTable = new Hashtable<>();
 		testHashTable.put(1, "one");
-		boolean result = Store.isThereAnyMilk(testHashTable);
+		boolean result = Store.isThereAnyFood(testHashTable);
 		assertEquals(result, false);
 	}
 	@Test

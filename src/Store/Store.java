@@ -18,11 +18,12 @@ public class Store {
 	private String address;
 	private String owner;
 	public Hashtable<Integer, StoreEntry> grocery = new Hashtable<>();
+
 	public static Store exactStore;
+	private boolean isClosed = true;
+	private static ArrayList<Store> storeList = new ArrayList();
 
-	public static ArrayList<Store> storeList = new ArrayList();
-
-	public Store(String name, String address, String owner, Hashtable<Integer, StoreEntry> grocery) {
+	public Store(String name, String address, String owner, Hashtable<Integer, StoreEntry> grocery, boolean isClosed) {
 		super();
 		this.name = name;
 		this.address = address;
@@ -30,7 +31,7 @@ public class Store {
 		this.grocery = grocery;
 	}
 
-	public Store(String name, String address, String owner) {
+	public Store(String name, String address, String owner, boolean isClosed) {
 		super();
 		this.name = name;
 		this.address = address;
@@ -49,9 +50,13 @@ public class Store {
 		return owner;
 	}
 
+	public boolean isClosed() {
+		return isClosed;
+	}
+
 	public static Store createStoreInstance() {
 		Store storeInstance = new Store(GetDataFromConsole.getStoreName(), GetDataFromConsole.getStoreAddress(),
-				GetDataFromConsole.getOwner());
+				GetDataFromConsole.getOwner(), true);
 		return storeInstance;
 	}
 	
@@ -113,7 +118,18 @@ public class Store {
 		return false;
 	}
 
-	public static boolean isThereAnyMilk(Hashtable bar) {
+	public boolean openCloseExactShop() {
+		if (isClosed) {
+			isClosed = false;
+			System.out.println("The store is now open");
+		} else {
+			isClosed = true;
+			System.out.println("The store is now closed");
+		}
+		return isClosed;
+	}
+
+	public static boolean isThereAnyFood(Hashtable bar) {
 		if (bar.isEmpty()) {
 			System.out.println("\nThe stock is empty.");
 			return true;

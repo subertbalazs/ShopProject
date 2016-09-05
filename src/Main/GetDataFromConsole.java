@@ -23,8 +23,6 @@ public class GetDataFromConsole {
 		return now;
 	}
 
-
-
 	public static Date nowDateParser() {
 		try {
 
