@@ -5,9 +5,6 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Scanner;
 
-import products.Food;
-import store.Store;
-
 public class GetDataFromConsole {
 
 	public static String getExpireDateFromConsole() {
@@ -26,20 +23,7 @@ public class GetDataFromConsole {
 		return now;
 	}
 
-	public static Date warantyDateParser() {
-		try {
 
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date warranty = sdf.parse(
-Food.returnValueTesterForGetWarrantyByConsole(
-					Food.getWarrantyByBarCode(getBarCodeFromConsole(), Store.grocery)));
-			return warranty;
-
-		} catch (ParseException ex) {
-			ex.printStackTrace();
-		}
-		return null;
-	}
 
 	public static Date nowDateParser() {
 		try {
@@ -162,6 +146,27 @@ Food.returnValueTesterForGetWarrantyByConsole(
 			quantity = reader.nextInt();
 		} while (quantity <= 0);
 		return quantity;
+	}
+
+	public static String getStoreName() {
+		Scanner reader = new Scanner(System.in);
+		System.out.println("Please enter the name of the store: ");
+		String storeName = reader.nextLine();
+		return storeName;
+	}
+
+	public static String getStoreAddress() {
+		Scanner reader = new Scanner(System.in);
+		System.out.println("Please enter the addresse of the store: ");
+		String storeAddresse = reader.nextLine();
+		return storeAddresse;
+	}
+
+	public static String getOwner() {
+		Scanner reader = new Scanner(System.in);
+		System.out.println("Please enter the store owner's name: ");
+		String owner = reader.nextLine();
+		return owner;
 	}
 	
 }

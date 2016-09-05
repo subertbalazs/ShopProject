@@ -66,7 +66,7 @@ public class TestStore {
 	public void test_buyMilk_returnFalse_inCaseOfEmptyHashTabl() {
 		Hashtable testHashTable = new Hashtable<>();
 		int barCode = 1;
-		boolean result = Store.buyMilk(barCode, testHashTable);
+		boolean result = Store.buyProduct(barCode, testHashTable);
 		assertEquals(result, false);
 	}
 	@Test
@@ -77,7 +77,7 @@ public class TestStore {
 		StoreEntry storeEntry1 = store.new StoreEntry(milk, 2, 230);
 		testHashTable.put(1, storeEntry1);
 		int barCode = 2;
-		boolean result = Store.buyMilk(barCode, testHashTable);
+		boolean result = Store.buyProduct(barCode, testHashTable);
 		assertEquals(result, false);
 	}
 	@Test
@@ -88,7 +88,7 @@ public class TestStore {
 		StoreEntry storeEntry1 = store.new StoreEntry(milk, 2, 230);
 		testHashTable.put(1111, storeEntry1);
 		int barCode = 1111;
-		boolean result = Store.buyMilk(barCode, testHashTable);
+		boolean result = Store.buyProduct(barCode, testHashTable);
 		assertEquals(result, true);
 	}
 	@Test
@@ -102,7 +102,7 @@ public class TestStore {
 		testHashTable.put(1111, storeEntry1);
 		testHashTable.put(2222, storeEntry2);
 		int barCode = 2222;
-		boolean result = Store.buyMilk(barCode, testHashTable);
+		boolean result = Store.buyProduct(barCode, testHashTable);
 		assertEquals(result, true);
 	}
 	@Test

@@ -20,9 +20,11 @@ public class Cheese extends Food {
 		return dripping;
 	}
 
+
 	@Override
 	public String toString() {
 		return super.toString() + "Weight: " + weight + "\n" + "Dripping: " + dripping;
 	}
+
 }
 

@@ -6,31 +6,23 @@ import java.util.Map.Entry;
 
 import Main.GetDataFromConsole;
 import Main.Menu;
+import store.Store;
 import store.Store.StoreEntry;
 
-public class Food {
+public abstract class Food extends Product {
 
-	private long barCode;
+
 	private String warrant;
-	private String company;
+
 
 	public Food(long barCode, String warrant, String company) {
-		super();
-		this.barCode = barCode;
-		this.warrant = warrant;
-		this.company = company;
-	}
+		super(barCode, company);
 
-	public long getBarCode() {
-		return barCode;
+		this.warrant = warrant;
 	}
 
 	public String getWarrant() {
 		return warrant;
-	}
-
-	public String getCompany() {
-		return company;
 	}
 
 	public static String getWarrantyByBarCode(long barCode, Hashtable bar) {
@@ -50,7 +42,7 @@ public class Food {
 
 	public static String returnValueTesterForGetWarrantyByConsole(String date) {
 		while (date == null) {
-			GetDataFromConsole.checkWarranty(GetDataFromConsole.warantyDateParser(),
+			GetDataFromConsole.checkWarranty(Store.warantyDateParser(),
 					GetDataFromConsole.nowDateParser());
 			Menu.createMenuStuff();
 		}
@@ -59,7 +51,7 @@ public class Food {
 
 	@Override
 	public String toString() {
-		return "BarCode: " + barCode + "\n" + "Warrant: " + warrant + "\n" + "Company: " + company + "\n";
+		return super.toString() + "\n" + "Warrant: " + warrant + "\n";
 	}
 
 }

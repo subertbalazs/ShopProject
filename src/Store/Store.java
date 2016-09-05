@@ -1,23 +1,26 @@
 package store;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
 import Main.GetDataFromConsole;
-import products.Cheese;
+import Main.Menu;
 import products.Food;
-import products.LongLifeMilk;
-import products.Milk;
-import products.SemiLongLifeMilk;
 
 public class Store {
 
 	private String name;
 	private String address;
 	private String owner;
-	public static Hashtable<Integer, StoreEntry> grocery = new Hashtable<>();
-	private int flag;
+	public Hashtable<Integer, StoreEntry> grocery = new Hashtable<>();
+	public static Store exactStore;
+
+	public static ArrayList<Store> storeList = new ArrayList();
 
 	public Store(String name, String address, String owner, Hashtable<Integer, StoreEntry> grocery) {
 		super();
@@ -46,16 +49,80 @@ public class Store {
 		return owner;
 	}
 
+	public static Store createStoreInstance() {
+		Store storeInstance = new Store(GetDataFromConsole.getStoreName(), GetDataFromConsole.getStoreAddress(),
+				GetDataFromConsole.getOwner());
+		return storeInstance;
+	}
+	
+	public static Store getStoreByName() {
+		String storeToFind = GetDataFromConsole.getStoreName();
+		for (int i = 0; i < storeList.size(); i++) {
+			if (storeToFind.equals(storeList.get(i).getName())) {
+				storeList.get(i).printStore();
+				return exactStore = storeList.get(i);
+
+			}
+		}
+		System.out.println("This is not valid store");
+		Menu.createMenuStuff();
+		return null;
+	}
+
+	public static Store returnValueTesterForGetStoreByName(Store store) {
+		while (store == null) {
+			Menu.drawAddFoodSubMenu();
+			Menu.addFoodSubMenuLogic(Menu.addFoodSubMenuItemScanner());
+		}
+		return store;
+	}
+
+	public static void addStoreToList(Store store) {
+		storeList.add(store);
+	}
+
+	public static void getStoreList() {
+		if (storeList.size() <= 0) {
+			System.out.println("There is not any store recorded!");
+		} else {
+			System.out.println("\nStores: ");
+			for (int i = 0; i < storeList.size(); i++) {
+				System.out.println(storeList.get(i).getName());
+			}
+		}
+	}
+
+	public static boolean isThereAnyStore() {
+		if (storeList.isEmpty()) {
+			System.out.println("\nThere is not any store...");
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean deleteStore() {
+		String nameToDelete = GetDataFromConsole.getStoreName();
+		for (int i = 0; i < storeList.size(); i++) {
+			if (nameToDelete.equals(storeList.get(i).getName())) {
+				storeList.remove(i);
+				System.out.println("The store: " + i + "is deleted");
+				return true;
+			}
+		}
+		System.out.println("This is not valid store");
+		return false;
+	}
+
 	public static boolean isThereAnyMilk(Hashtable bar) {
 		if (bar.isEmpty()) {
 			System.out.println("\nThe stock is empty.");
 			return true;
 		}
-		System.out.println("\nThe milkBar contains: \n" + bar.toString());
+		System.out.println("\nThe stock contains: \n" + bar.toString());
 		return false;
 	}
 
-	public static boolean buyMilk(long barCode, Hashtable bar) {
+	public static boolean buyProduct(long barCode, Hashtable bar) {
 		Integer integerBarCode = (int) (long) barCode;
 		for (Iterator<Entry<Integer, StoreEntry>> i = bar.entrySet().iterator(); i.hasNext();) {
 			Entry<Integer, StoreEntry> entry = i.next();
@@ -91,56 +158,30 @@ public class Store {
 		return false;
 	}
 
-	public static Milk createLongLifeMilkInstance() {
-		Milk milkObjectLL = new LongLifeMilk(GetDataFromConsole.getBarCodeFromConsole(),
-				GetDataFromConsole.getCapacityFromConsole(), GetDataFromConsole.getExpireDateFromConsole(),
-				GetDataFromConsole.getDrippingFromConsole(), GetDataFromConsole.getCompanyFromConsole());
-		return milkObjectLL;
-	}
-
-	public static Milk createSemiLongLifeMilkInstance() {
-		Milk milkObjectSLL = new SemiLongLifeMilk(GetDataFromConsole.getBarCodeFromConsole(),
-				GetDataFromConsole.getCapacityFromConsole(), GetDataFromConsole.getExpireDateFromConsole(),
-				GetDataFromConsole.getDrippingFromConsole(), GetDataFromConsole.getCompanyFromConsole());
-		return milkObjectSLL;
-	}
-
-	public static Cheese createCheeseInstance() {
-		Cheese cheeseObj = new Cheese(GetDataFromConsole.getBarCodeFromConsole(),
-				GetDataFromConsole.getWeightFromConsole(), GetDataFromConsole.getExpireDateFromConsole(),
-				GetDataFromConsole.getDrippingFromConsole(), GetDataFromConsole.getCompanyFromConsole());
-		return cheeseObj;
-	}
-
-	public static Store createStoreInstance() {
-		Store storeInstance = new Store("TestBolt", "Miskolc", "The Boss");
-		return storeInstance;
-	}
-
-	public static StoreEntry createStoreEntryInstanceLongLife(Store store) {
-		StoreEntry storeEntryObject = store.new StoreEntry(createLongLifeMilkInstance(),
+	public static StoreEntry createStoreEntryInstanceLongLife() {
+		StoreEntry storeEntryObject = exactStore.new StoreEntry(ProductFactory.createLongLifeMilkInstance(),
 				GetDataFromConsole.getQuantityFromConsole(), GetDataFromConsole.getPriceFromConsole());
 
 		return storeEntryObject;
 	}
 
-	public static StoreEntry createStoreEntryInstanceSemiLongLife(Store store) {
-		StoreEntry storeEntryObject = store.new StoreEntry(createSemiLongLifeMilkInstance(),
+	public static StoreEntry createStoreEntryInstanceSemiLongLife() {
+		StoreEntry storeEntryObject = exactStore.new StoreEntry(ProductFactory.createSemiLongLifeMilkInstance(),
 				GetDataFromConsole.getQuantityFromConsole(), GetDataFromConsole.getPriceFromConsole());
 
 		return storeEntryObject;
 	}
 
-	public static StoreEntry createStoreEntryInstanceCheese(Store store) {
-		StoreEntry storeEntryObject = store.new StoreEntry(createCheeseInstance(),
+	public static StoreEntry createStoreEntryInstanceCheese() {
+		StoreEntry storeEntryObject = exactStore.new StoreEntry(ProductFactory.createCheeseInstance(),
 				GetDataFromConsole.getQuantityFromConsole(), GetDataFromConsole.getPriceFromConsole());
 
 		return storeEntryObject;
 	}
 
-	public static boolean addNewProductToStore(StoreEntry storeEntry, Hashtable store) {
+	public boolean addNewProductToStore(StoreEntry storeEntry) {
 		try {
-			store.put((int) storeEntry.food.getBarCode(), storeEntry);
+			exactStore.grocery.put((int) storeEntry.food.getBarCode(), storeEntry);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -148,9 +189,9 @@ public class Store {
 		return true;
 	}
 
-	public static boolean addExistingProduct(long barCode, Hashtable store) {
+	public boolean addExistingProduct(long barCode) {
 		Integer integerBarCode = (int) (long) barCode;
-		for (Iterator<Entry<Integer, StoreEntry>> i = store.entrySet().iterator(); i.hasNext();) {
+		for (Iterator<Entry<Integer, StoreEntry>> i = exactStore.grocery.entrySet().iterator(); i.hasNext();) {
 			Entry<Integer, StoreEntry> entry = i.next();
 			Integer key = entry.getKey();
 			StoreEntry value = entry.getValue();
@@ -166,8 +207,22 @@ public class Store {
 		return false;
 	}
 
-	public static void printStore() {
-		System.out.println("\nThe store contains: \n" + grocery.toString() + "\n");
+	public void printStore() {
+		System.out.println("\nThe store contains: \n" + this.grocery.toString() + "\n");
+	}
+
+	public static Date warantyDateParser() {
+		try {
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date warranty = sdf.parse(Food.returnValueTesterForGetWarrantyByConsole(Food
+.getWarrantyByBarCode(GetDataFromConsole.getBarCodeFromConsole(), exactStore.grocery)));
+			return warranty;
+
+		} catch (ParseException ex) {
+			ex.printStackTrace();
+		}
+		return null;
 	}
 
 	public class StoreEntry {
@@ -219,4 +274,5 @@ public class Store {
 		}
 
 	}
+
 }
