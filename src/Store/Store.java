@@ -21,7 +21,7 @@ public class Store {
 
 	public static Store exactStore;
 	private boolean isClosed = true;
-	private static ArrayList<Store> storeList = new ArrayList();
+	public static ArrayList<Store> storeList = new ArrayList();
 
 	public Store(String name, String address, String owner, Hashtable<Integer, StoreEntry> grocery, boolean isClosed) {
 		super();
@@ -60,13 +60,12 @@ public class Store {
 		return storeInstance;
 	}
 	
-	public static Store getStoreByName() {
+	public static Store getStoreByName(ArrayList<Store> storeList) {
 		String storeToFind = GetDataFromConsole.getStoreName();
 		for (int i = 0; i < storeList.size(); i++) {
 			if (storeToFind.equals(storeList.get(i).getName())) {
 				storeList.get(i).printStore();
 				return exactStore = storeList.get(i);
-
 			}
 		}
 		System.out.println("This is not valid store");
@@ -82,8 +81,15 @@ public class Store {
 		return store;
 	}
 
-	public static void addStoreToList(Store store) {
-		storeList.add(store);
+	public static boolean addStoreToList(Store store, ArrayList<Store> storeList) {
+		try {
+			storeList.add(store);
+			return true;
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	public static void getStoreList() {
@@ -97,7 +103,7 @@ public class Store {
 		}
 	}
 
-	public static boolean isThereAnyStore() {
+	public static boolean isTheStoreListEmpty(ArrayList<Store> storeList) {
 		if (storeList.isEmpty()) {
 			System.out.println("\nThere is not any store...");
 			return true;
@@ -129,7 +135,7 @@ public class Store {
 		return isClosed;
 	}
 
-	public static boolean isThereAnyFood(Hashtable bar) {
+	public static boolean isTheGroceryEmpty(Hashtable bar) {
 		if (bar.isEmpty()) {
 			System.out.println("\nThe stock is empty.");
 			return true;
@@ -198,11 +204,11 @@ public class Store {
 	public boolean addNewProductToStore(StoreEntry storeEntry) {
 		try {
 			exactStore.grocery.put((int) storeEntry.food.getBarCode(), storeEntry);
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
-		return true;
 	}
 
 	public boolean addExistingProduct(long barCode) {

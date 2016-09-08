@@ -36,14 +36,14 @@ public class Menu {
 		final int delete = 3;
 
 		if (chosen == addStore) {
-			Store.addStoreToList(Store.createStoreInstance());
+			Store.addStoreToList(Store.createStoreInstance(), Store.storeList);
 			Store.getStoreList();
 			createMenuStuff();
 
 		} else if (chosen == fillStore) {
-			if (!Store.isThereAnyStore()) {
+			if (!Store.isTheStoreListEmpty(Store.storeList)) {
 				Store.getStoreList();
-				Store.getStoreByName();
+				Store.getStoreByName(Store.storeList);
 				drawStoreMenu();
 				storeMenuLogic(storeMenuItemScanner());
 			}
@@ -109,7 +109,7 @@ public class Menu {
 			storeMenuLogic(storeMenuItemScanner());
 		} else if (chosen == isThereMilk) {
 			if (!Store.exactStore.isClosed()) {
-				Store.isThereAnyFood(Store.exactStore.grocery);
+				Store.isTheGroceryEmpty(Store.exactStore.grocery);
 				createMenuStuff();
 			}
 			System.out.println("You have to open the shop first. (Use menu item: 1.)");
@@ -117,7 +117,7 @@ public class Menu {
 			storeMenuLogic(storeMenuItemScanner());
 		} else if (chosen == buyMilk) {
 			if (!Store.exactStore.isClosed()) {
-				if (!Store.isThereAnyFood(Store.exactStore.grocery)) {
+				if (!Store.isTheGroceryEmpty(Store.exactStore.grocery)) {
 					Store.buyProduct(GetDataFromConsole.getBarCodeFromConsole(), Store.exactStore.grocery);
 				}
 				createMenuStuff();
@@ -127,7 +127,7 @@ public class Menu {
 			storeMenuLogic(storeMenuItemScanner());
 		} else if (chosen == checkWarranty) {
 			if (!Store.exactStore.isClosed()) {
-				if (!Store.isThereAnyFood(Store.exactStore.grocery)) {
+				if (!Store.isTheGroceryEmpty(Store.exactStore.grocery)) {
 					GetDataFromConsole.checkWarranty(Store.warantyDateParser(), GetDataFromConsole.nowDateParser());
 					createMenuStuff();
 				}
@@ -180,7 +180,7 @@ public class Menu {
 			drawMilkLifeSubMenu();
 			milkLifeMenuLogic(addFoodSubMenuItemScanner());
 		} else if (chosen == existingMilk) {
-			if (!Store.isThereAnyFood(Store.exactStore.grocery)) {
+			if (!Store.isTheGroceryEmpty(Store.exactStore.grocery)) {
 				Store.exactStore.addExistingProduct(GetDataFromConsole.getBarCodeFromConsole());
 			}
 			createMenuStuff();
@@ -190,7 +190,7 @@ Store.createStoreEntryInstanceCheese());
 			Store.exactStore.printStore();
 			createMenuStuff();
 		} else if (chosen == existingCheese) {
-			if (!Store.isThereAnyFood(Store.exactStore.grocery)) {
+			if (!Store.isTheGroceryEmpty(Store.exactStore.grocery)) {
 				Store.exactStore.addExistingProduct(GetDataFromConsole.getBarCodeFromConsole());
 			}
 		} else if (chosen == main) {
