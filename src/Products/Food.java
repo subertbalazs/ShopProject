@@ -25,7 +25,7 @@ public abstract class Food extends Product {
 		return warrant;
 	}
 
-	public static String getWarrantyByBarCode(long barCode, Hashtable bar) {
+	public static String getWarrantyByBarCode(long barCode, Hashtable<Integer, StoreEntry> bar) {
 		Integer integerBarCode = (int) (long) barCode;
 		for (Iterator<Entry<Integer, StoreEntry>> i = bar.entrySet().iterator(); i.hasNext();) {
 			Entry<Integer, StoreEntry> entry = i.next();
@@ -40,6 +40,9 @@ public abstract class Food extends Product {
 		return null;
 	}
 
+	// If the getWarrantyByConsole return null there will be an exception to
+	// avoid this
+	// I use this method.
 	public static String returnValueTesterForGetWarrantyByConsole(String date) {
 		while (date == null) {
 			GetDataFromConsole.checkWarranty(Store.warantyDateParser(),

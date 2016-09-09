@@ -30,7 +30,7 @@ public class TestFood {
 	}
 	@Test
 	public void test_getWarrantyByBarCode_ReturnBarCode_inCaseOfEmptyHashTable() {
-		Hashtable<Integer, Milk> testHashTable = new Hashtable<>();
+		Hashtable<Integer, StoreEntry> testHashTable = new Hashtable<>();
 		int barCode = 1111;
 		String result = Milk.getWarrantyByBarCode(barCode, testHashTable);
 		assertEquals(result, null);

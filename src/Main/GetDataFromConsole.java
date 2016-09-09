@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class GetDataFromConsole {
 
 	public static String getExpireDateFromConsole() {
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		String date;
 		String pattern = "[0-9]{4}-[0-9]{2}-[0-9]{2}";
@@ -56,6 +57,7 @@ public class GetDataFromConsole {
 	}
 
 	public static int getCapacityFromConsole() {
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		int capacity;
 		do {
@@ -70,6 +72,7 @@ public class GetDataFromConsole {
 	}
 
 	public static double getWeightFromConsole() {
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		double weight;
 		do {
@@ -84,6 +87,7 @@ public class GetDataFromConsole {
 	}
 
 	public static double getDrippingFromConsole() {
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		double dripping;
 		do {
@@ -98,6 +102,7 @@ public class GetDataFromConsole {
 	}
 
 	public static long getPriceFromConsole() {
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		long price;
 		do {
@@ -112,6 +117,7 @@ public class GetDataFromConsole {
 	}
 
 	public static String getCompanyFromConsole() {
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		System.out.println("Please enter the company name: ");
 		String company = reader.nextLine();
@@ -119,6 +125,7 @@ public class GetDataFromConsole {
 	}
 
 	public static long getBarCodeFromConsole() {
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		long barCode;
 		do {
@@ -133,6 +140,7 @@ public class GetDataFromConsole {
 	}
 
 	public static int getQuantityFromConsole() {
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		int quantity;
 		do {
@@ -147,6 +155,7 @@ public class GetDataFromConsole {
 	}
 
 	public static String getStoreName() {
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		System.out.println("Please enter the name of the store: ");
 		String storeName = reader.nextLine();
@@ -154,6 +163,7 @@ public class GetDataFromConsole {
 	}
 
 	public static String getStoreAddress() {
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		System.out.println("Please enter the addresse of the store: ");
 		String storeAddresse = reader.nextLine();
@@ -161,6 +171,7 @@ public class GetDataFromConsole {
 	}
 
 	public static String getOwner() {
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		System.out.println("Please enter the store owner's name: ");
 		String owner = reader.nextLine();

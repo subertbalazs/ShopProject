@@ -14,6 +14,7 @@ public class Menu {
 	}
 	
 	static int mainMenuItemScanner() {
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		int minimumMenuItem = 0;
 		int maximumMenuItem = 3;
@@ -71,9 +72,10 @@ public class Menu {
 	
 	static int storeMenuItemScanner() {
 
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		int minimumMenuItem = 0;
-		int maximumMenuItem = 5;
+		int maximumMenuItem = 6;
 		int menuItem;
 		do {
 			System.out.println("Please enter the number of the menu item you would like to choose: ");
@@ -153,6 +155,7 @@ public class Menu {
 
 	public static int addFoodSubMenuItemScanner() {
 
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		int minimumMenuItem = 0;
 		int maximumMenuItem = 5;
@@ -209,6 +212,7 @@ Store.createStoreEntryInstanceCheese());
 
 	static int milkLifeSubMenuItemScanner() {
 
+		@SuppressWarnings("resource")
 		Scanner reader = new Scanner(System.in);
 		int minimumMenuItem = 0;
 		int maximumMenuItem = 3;

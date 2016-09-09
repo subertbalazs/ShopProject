@@ -21,7 +21,7 @@ public class Store {
 
 	public static Store exactStore;
 	private boolean isClosed = true;
-	public static ArrayList<Store> storeList = new ArrayList();
+	public static ArrayList<Store> storeList = new ArrayList<Store>();
 
 	public Store(String name, String address, String owner, Hashtable<Integer, StoreEntry> grocery, boolean isClosed) {
 		super();
@@ -50,6 +50,7 @@ public class Store {
 		return owner;
 	}
 
+	// Actually it's a getter!!!
 	public boolean isClosed() {
 		return isClosed;
 	}
@@ -73,6 +74,9 @@ public class Store {
 		return null;
 	}
 
+	// If the getStoreByName return null there will be an exception to avoid
+	// this
+	// I use this method.
 	public static Store returnValueTesterForGetStoreByName(Store store) {
 		while (store == null) {
 			Menu.drawAddFoodSubMenu();
@@ -105,7 +109,7 @@ public class Store {
 
 	public static boolean isTheStoreListEmpty(ArrayList<Store> storeList) {
 		if (storeList.isEmpty()) {
-			System.out.println("\nThere is not any store...");
+			System.out.println("\nThere is not any store recorded!");
 			return true;
 		}
 		return false;
@@ -116,26 +120,26 @@ public class Store {
 		for (int i = 0; i < storeList.size(); i++) {
 			if (nameToDelete.equals(storeList.get(i).getName())) {
 				storeList.remove(i);
-				System.out.println("The store: " + i + "is deleted");
+				System.out.println("The store is deleted.");
 				return true;
 			}
 		}
-		System.out.println("This is not valid store");
+		System.out.println("This is not valid store!");
 		return false;
 	}
 
 	public boolean openCloseExactShop() {
 		if (isClosed) {
 			isClosed = false;
-			System.out.println("The store is now open");
+			System.out.println("The store is now open.");
 		} else {
 			isClosed = true;
-			System.out.println("The store is now closed");
+			System.out.println("The store is now closed.");
 		}
 		return isClosed;
 	}
 
-	public static boolean isTheGroceryEmpty(Hashtable bar) {
+	public static boolean isTheGroceryEmpty(Hashtable<Integer, StoreEntry> bar) {
 		if (bar.isEmpty()) {
 			System.out.println("\nThe stock is empty.");
 			return true;
@@ -144,7 +148,13 @@ public class Store {
 		return false;
 	}
 
-	public static boolean buyProduct(long barCode, Hashtable bar) {
+	/*
+	 * I use this method to find the product by barcode and ask the quantity as
+	 * well. If I find the product I check the quantity and decrease it. This
+	 * method is a little bit too long and does multiple things but it's
+	 * working.:) Need to refactor later!!!
+	 */
+	public static boolean buyProduct(long barCode, Hashtable<Integer, StoreEntry> bar) {
 		Integer integerBarCode = (int) (long) barCode;
 		for (Iterator<Entry<Integer, StoreEntry>> i = bar.entrySet().iterator(); i.hasNext();) {
 			Entry<Integer, StoreEntry> entry = i.next();
