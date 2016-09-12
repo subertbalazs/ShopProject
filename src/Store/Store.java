@@ -74,17 +74,6 @@ public class Store {
 		return null;
 	}
 
-	// If the getStoreByName return null there will be an exception to avoid
-	// this
-	// I use this method.
-	public static Store returnValueTesterForGetStoreByName(Store store) {
-		while (store == null) {
-			Menu.drawAddFoodSubMenu();
-			Menu.addFoodSubMenuLogic(Menu.addFoodSubMenuItemScanner());
-		}
-		return store;
-	}
-
 	public static boolean addStoreToList(Store store, ArrayList<Store> storeList) {
 		try {
 			storeList.add(store);
