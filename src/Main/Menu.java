@@ -250,10 +250,4 @@ Store.createStoreEntryInstanceCheese());
 		drawMainMenu();
 		mainMenuLogic(mainMenuItemScanner());
 	}
-
-	private static void clearScreen() {
-		// it is not working, must be solved
-		System.out.print("\033[H\033[2J");
-	}
-	
 }

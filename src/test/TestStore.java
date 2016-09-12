@@ -164,27 +164,5 @@ public class TestStore {
 		Integer result = storeEntry.getQuantity();
 		assertFalse(price.equals(result));
 	}
-	/*
-	 * @Test public void
-	 * test_buyProduct_returnTrue_inCaseOfOneItemWithCorrectKey() {
-	 * Hashtable<Integer, StoreEntry> testHashTable = new Hashtable<>(); Store
-	 * store = new Store("TestBolt", "Miskolc", "The Boss", true); Milk milk =
-	 * new LongLifeMilk(1111, 1000, "1999-11-11", 1.0, "test"); StoreEntry
-	 * storeEntry1 = store.new StoreEntry(milk, 2, 230); testHashTable.put(1111,
-	 * storeEntry1); int barCode = 1111; boolean result =
-	 * Store.buyProduct(barCode, testHashTable); assertEquals(result, true); }
-	 * 
-	 * @Test public void
-	 * test_buyProduct_returnTrue_inCaseOfMultipleItemWithCorrectKey() {
-	 * Hashtable<Integer, StoreEntry> testHashTable = new Hashtable<>(); Store
-	 * store = new Store("TestBolt", "Miskolc", "The Boss", true); Milk milk =
-	 * new LongLifeMilk(1111, 1000, "1999-11-11", 1, "test"); Milk milk2 = new
-	 * LongLifeMilk(2222, 500, "2012-11-11", 1, "test2"); StoreEntry storeEntry1
-	 * = store.new StoreEntry(milk, 1, 230); StoreEntry storeEntry2 = store.new
-	 * StoreEntry(milk2, 2, 240); testHashTable.put(1111, storeEntry1);
-	 * testHashTable.put(2222, storeEntry2); int barCode = 2222; boolean result
-	 * = Store.buyProduct(barCode, testHashTable); assertEquals(result, true); }
-	 */
-
 }
 

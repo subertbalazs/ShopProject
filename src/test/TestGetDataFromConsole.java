@@ -57,7 +57,6 @@ public class TestGetDataFromConsole {
 			boolean result = GetDataFromConsole.checkWarranty(warranty, now);
 			assertEquals(result, true);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

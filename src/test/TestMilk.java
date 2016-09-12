@@ -54,12 +54,4 @@ public class TestMilk {
 		assertFalse(company.equals(result));
 	}
 
-	/*
-	 * @Test public void
-	 * test_returnValueTesterForGetWarrantyByConsole_inCaseOfDate() { String
-	 * date = null; String result =
-	 * Milk.returnValueTesterForGetWarrantyByConsole(date);
-	 * assertFalse(date.equals(result)); }
-	 */
-
 }
